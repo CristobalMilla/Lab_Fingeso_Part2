@@ -61,20 +61,20 @@
                 }
             }
         }
-        if(userTypes.includes("desarrollador")){
-            developer = 1;
-        };
-        if(userTypes.includes("administrador")){
-            admin = 1;
-        };
-        if(userTypes.includes("cliente")){
-            client = 1;
-        };
-        if(userTypes.includes("empleado")){
-            employer = 1;
-        };
         
     }
+    if(userTypes.includes("desarrollador")){
+            developer = 1;
+    };
+    if(userTypes.includes("administrador")){
+            admin = 1;
+    };
+    if(userTypes.includes("cliente")){
+            client = 1;
+    };
+    if(userTypes.includes("empleado")){
+            employer = 1;
+    };
 
 
 </script>

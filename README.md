@@ -1,7 +1,7 @@
 
 # Lab Fingeso
 
-Trabajo de laboratorio para proyecto de Fundamentos de Ingenieria de Software 2-2024
+Trabajo de laboratorio para proyecto de Fundamentos de Ingenieria de Software 2-2024. Parte 2.
 
 
 ## Authors

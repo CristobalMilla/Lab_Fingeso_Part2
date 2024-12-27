@@ -1,6 +1,7 @@
 package grupo3.LabFingeso.controller;
 
 
+import grupo3.LabFingeso.entity.usuarioActualEntity;
 import grupo3.LabFingeso.entity.usuarioEntity;
 import grupo3.LabFingeso.service.usuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,23 @@ public class usuarioController {
         usuarioService.deleteUsuarioById(idUsuario);
     }
 
+    @GetMapping("/usuarioActual")
+    public usuarioActualEntity getUsuarioActual(){
+        return usuarioService.getUsuarioActual();
+    }
 
+    @GetMapping("/usuarioActual/id")
+    public long getIdUsuarioActual(){
+        return usuarioService.getIdUsuarioActual();
+    }
 
+    @GetMapping("/usuarioActual/nombre")
+    public String getNombreUsuarioActual(){
+        return usuarioService.getNombreUsuarioActual();
+    }
+
+    @GetMapping("/usuarioActual/perfilActual")
+    public String getPerfilUsuarioActual(){
+        return usuarioService.getPerfilUsuarioActual();
+    }
 }

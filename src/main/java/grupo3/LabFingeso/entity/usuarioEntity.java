@@ -37,7 +37,7 @@ public class usuarioEntity {
         this.contrasena = contrasena;
         this.perfilactual = null;
         this.perfilesdisponibles = new ArrayList<>();
-        this.perfilesdisponibles.add("usuario");
+        this.perfilesdisponibles.add("Usuario");
     }
 
     public usuarioEntity() {

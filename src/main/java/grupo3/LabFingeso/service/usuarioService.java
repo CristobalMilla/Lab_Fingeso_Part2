@@ -1,9 +1,7 @@
 package grupo3.LabFingeso.service;
 
-import grupo3.LabFingeso.entity.sucursalEntity;
-import grupo3.LabFingeso.entity.tipoUsuarioEntity;
+import grupo3.LabFingeso.entity.usuarioActualEntity;
 import grupo3.LabFingeso.entity.usuarioEntity;
-import grupo3.LabFingeso.repository.tipoUsuarioRepository;
 import grupo3.LabFingeso.repository.usuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,16 +10,19 @@ import java.util.List;
 
 @Service
 public class usuarioService {
-
-    private final usuarioRepository usuarioRepo;
     @Autowired
+    private final usuarioRepository usuarioRepo;
+
+    private usuarioActualEntity usuarioActualSesion;
+
     public usuarioService(usuarioRepository usuarioRepo) {
+        this.usuarioActualSesion = new usuarioActualEntity();
         this.usuarioRepo = usuarioRepo;
     }
 
     public usuarioEntity registro(int rut, String nombre, int edad,
-                                       String correo, String carnet, String licenciaConducir,
-                                       String contrasena) {
+                                  String correo, String carnet, String licenciaConducir,
+                                  String contrasena) {
         usuarioEntity usuario = new usuarioEntity(rut, nombre, edad, correo, carnet, licenciaConducir, contrasena);
         usuarioEntity existente = usuarioRepo.findByCorreo(usuario.getCorreo());
         if (existente != null){
@@ -42,7 +43,16 @@ public class usuarioService {
         }
         if (usuarioActual.getContrasena().equals(contrasena)) {
             if (usuarioActual.getPerfilactual() == null || usuarioActual.getPerfilactual().isEmpty()) {
-                return 1;
+                try {
+                    usuarioActualSesion.setIdUsuario(usuarioActual.getIdusuario());
+                    usuarioActualSesion.setNombreusuario(usuarioActual.getNombre());
+                    return 1;
+                }
+                catch (Exception e){
+                    System.out.println("Error al asignar al usuario como usuario actual en la sesion");
+                    return 0;
+                }
+
             } else {
                 return 0;
             }
@@ -63,6 +73,7 @@ public class usuarioService {
                     if (perfilesDisponibles.contains(cambioPerfil)) {
                         usuario.setPerfilactual(cambioPerfil);
                         usuarioRepo.save(usuario);
+                        usuarioActualSesion.setPerfilactual(cambioPerfil);
                     }
                 } catch (Exception e) {
                     System.out.println("Perfil elegirPerfil no encontrado dentro de los perfiles disponibles del usuario");
@@ -83,6 +94,7 @@ public class usuarioService {
                     if (perfilesDisponibles.contains(cambioPerfil)) {
                         usuario.setPerfilactual(cambioPerfil);
                         usuarioRepo.save(usuario);
+                        usuarioActualSesion.setPerfilactual(cambioPerfil);
                     }
                 } catch (Exception e) {
                     System.out.println("Perfil elegirPerfil no encontrado dentro de los perfiles disponibles del usuario");
@@ -165,7 +177,21 @@ public class usuarioService {
 
 
 
+    public usuarioActualEntity getUsuarioActual(){
+        return usuarioActualSesion;
+    }
 
+    public long getIdUsuarioActual(){
+        return usuarioActualSesion.getIdUsuario();
+    }
+
+    public String getNombreUsuarioActual(){
+        return usuarioActualSesion.getNombreusuario();
+    }
+
+    public String getPerfilUsuarioActual(){
+        return usuarioActualSesion.getPerfilactual();
+    }
 
 
 }

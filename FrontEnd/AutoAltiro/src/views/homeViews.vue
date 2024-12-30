@@ -47,7 +47,7 @@ import axios from 'axios'
 //Usuario
 function redireccionarASubpaginaSeleccionTipoUsuario(){
     //CAMBIAR POR /tipoUsuario cuando se pueda
-    window.location.href = '/menuAdmin';
+    window.location.href = '/tipoUsuario';
 
 }
 //Usuario Anonimo

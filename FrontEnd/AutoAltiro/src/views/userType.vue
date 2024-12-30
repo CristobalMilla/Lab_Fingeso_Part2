@@ -38,7 +38,11 @@
 <script>
     import axios from 'axios';
     //Redireccionamientos
+    //Menu Admin
+    function redireccionarAPaginaMenuAdmin(){
+        window.location.href = '/menuAdmin';
     
+}
     export default{
         data(){
             return{
@@ -49,20 +53,26 @@
             }
         },
         methods:{
+            async recuperarIdUsuario(){
+                const idUsuario = 0,
+                try {
+                    idUsuario = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/id");
+                } catch (error) {
+                    alert("No se pudo recuperar el Id del usuario logueado")
+                } 
+            },
             async permisos(){
                 //Solcitud de datos backend
-                const usuario = {
-                    "tiposUsuario": this.perfilesDisponibles,
-                };
                 try {
-                    const respuesta = await axios.post;
+                    const respuesta = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/obtenerPerfilesById/" + idUsuario);
+                    console.log(respuesta)
                 } catch (error) {
-                        ;
+                    alert("No se pudo recuperar la lista de perfiles del usuario logueado")
                 }
-            }
+            },
         }
         
-    }
+    }/*
     if(userTypes.includes("desarrollador")){
             developer = 1;
     };
@@ -74,7 +84,7 @@
     };
     if(userTypes.includes("empleado")){
             employer = 1;
-    };
+    }; */
 
 
 </script>

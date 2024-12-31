@@ -23,7 +23,7 @@ const router = createRouter({
         {
             path: '/tipoUsuario',
             name: 'tipoUsuario',
-            component: () => import('../views/userType.vue'),
+            component: () => import('../views/userTypeViews.vue'),
         },
         {
             path:'/menuAdmin',

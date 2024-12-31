@@ -45,13 +45,12 @@ import axios from 'axios'
 
 //Redireccionamiento
 //Usuario
-function redireccionarASubpaginaSeleccionTipoUsuario(){
-    //CAMBIAR POR /tipoUsuario cuando se pueda
+function redireccionarAPaginaSeleccionTipoUsuario(){
     window.location.href = '/tipoUsuario';
 
 }
 //Usuario Anonimo
-function redireccionarASubpaginaUsuarioAnonimo(){
+function redireccionarAPaginaUsuarioAnonimo(){
     window.location.href = '/consultaFlota';
     
 }
@@ -90,7 +89,7 @@ export default{
                 const respuesta = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/login/", usuario);
                 if (respuesta.data == 1){
                     localStorage.setItem('login', JSON.stringify(this.username));
-                    redireccionarASubpaginaSeleccionTipoUsuario();
+                    redireccionarAPaginaSeleccionTipoUsuario();
                 }
                 if(respuesta.data == 0){
                     alert("Credenciales Invalidas");
@@ -108,7 +107,7 @@ export default{
         },
         anonimo(){
             this.username = "anonimo"
-            redireccionarASubpaginaUsuarioAnonimo();
+            redireccionarAPaginaUsuarioAnonimo();
             localStorage.setItem("login", JSON.stringify(this.username));
         },
         async addUser(){

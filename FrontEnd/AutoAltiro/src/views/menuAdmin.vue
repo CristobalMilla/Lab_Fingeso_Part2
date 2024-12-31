@@ -30,6 +30,16 @@
                         <div class="alsoButton" @click="recepcion">Recepcionar vehiculos / Cambiar disponibilidad</div>
                     </router-link>
                 </div>
+                <div class="alsoButtons">
+                   <router-link to="/tipoUsuario">
+                        <div class="alsoButton" @click="returnAdmin">Regresar</div>
+                   </router-link>
+                </div>
+                <div class="alsoButtons">
+                   <router-link to="/inicio">
+                        <div class="alsoButton" @click="logout">Logout</div>
+                   </router-link>
+                </div>
             </div>
         </div>
     </main>
@@ -53,6 +63,15 @@
     function redireccionarAPaginaDisponibilidad(){
         window.location.href = '/disponibilidad';
     }
+    //Volver a pagina anterior
+    function redireccionarAPaginaSeleccionTipoUsuario(){
+        window.location.href = '/tipoUsuario';
+    }
+    //Lougout
+    function redireccionarAPaginaPrincipal(){
+        window.location.href = '/inicio';
+    }
+
     //Metodos
     export default{
         data(){
@@ -76,6 +95,14 @@
             handleChangeFlota(){
                 this.changeFlota = !this.changeFlota
                 console.log(this.register)
+            },
+            returnAdmin(){
+                //SECCION DE RETURN A TIPO USUARIO
+                redireccionarAPaginaSeleccionTipoUsuario();
+            },
+            logout(){
+                //SECCION DE LOGOUT
+                redireccionarAPaginaPrincipal();
             }
         }
     }

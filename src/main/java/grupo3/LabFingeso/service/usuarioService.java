@@ -46,6 +46,7 @@ public class usuarioService {
                 try {
                     usuarioActualSesion.setIdUsuario(usuarioActual.getIdusuario());
                     usuarioActualSesion.setNombreusuario(usuarioActual.getNombre());
+                    usuarioActualSesion.setCorreoUsuario(usuarioActual.getCorreo());
                     return 1;
                 }
                 catch (Exception e){

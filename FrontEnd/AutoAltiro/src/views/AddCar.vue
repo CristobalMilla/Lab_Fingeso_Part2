@@ -9,15 +9,15 @@
       <div class="InputContainer">
         <input type="marca" v-model="vehicleBrand" placeholder="Ingrese la marca del vehiculo">
         <input type="modelo" v-model="vehicleModel" placeholder="Ingrese el modelo del vehiculo">
-        <input type="tipo" v-model="vehicleType" placeholder="Ingrese el tipo de vehiculo">
+        <input type="tipo" v-model="vehicleType" required pattern="[BCDWVLSTFJXPQZEMRHYNGK]" maxlength=1 placeholder="Ingrese el tipo de vehiculo">
         <input type="matricula" v-model="vehicleNumber" placeholder="Ingrese el numero de matricula  del vehiculo">
-        <input type="kilometraje" v-model="vehicleMilleage" placeholder="Ingrese el kilometraje del vehiculo">
+        <input type="number" v-model="vehicleMilleage" min=0 placeholder="Ingrese el kilometraje del vehiculo">
         <input type="estado" v-model="vehicleState" placeholder="Ingrese el estado del vehiculo">
-        <input type="precioBase" v-model="vehicleBasePrice" placeholder="Ingrese el precio base del vehiculo">
-        <input type="categoria" v-model="vehicleCategory" placeholder="Ingrese la categoria del vehiculo">
-        <input type="transmision" v-model="vehicleTransmission" placeholder="Ingrese el tipo de transmision del vehiculo">
-        <input type="combustible" v-model="vehiculeFuel" placeholder="Ingrese el tipo de combustible del vehiculo">
-        <input type="idSucursal" v-model="sucursalId" placeholder="Ingrese el numero de Id de la sucursal">
+        <input type="number" v-model="vehicleBasePrice" min=0 placeholder="Ingrese el precio base del vehiculo">
+        <input type="categoria" v-model="vehicleCategory" required pattern="[MNEHCDIJSRFGPULWOX]" maxlength=1 placeholder="Ingrese la categoria del vehiculo">
+        <input type="text" v-model="vehicleTransmission" required pattern="[MNCABD]" maxlength=1 placeholder="Ingrese el tipo de transmision del vehiculo">
+        <input type="combustible" v-model="vehiculeFuel" required pattern="[RNDQHIECLSABMFVZUX]" maxlength=1 placeholder="Ingrese el tipo de combustible del vehiculo">
+        <input type="number" v-model="sucursalId" min=1 placeholder="Ingrese el numero de Id de la sucursal">
         <button class="sessionButton" @click="agregarVehiculo">Agregar vehiculo</button>
       </div>
       <div class="alsoButtons">
@@ -88,3 +88,17 @@
     },
   }
 </script>
+
+<style>
+input:required {
+  border-color: #800000;
+  border-width: 3px;
+}
+
+input:required:invalid {
+  border-color: #c00000;
+}
+input:required:valid {
+  border-color: #00c000;
+}
+</style>

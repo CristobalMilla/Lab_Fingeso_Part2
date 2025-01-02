@@ -11,19 +11,19 @@
                 <div class="headerDescription" v-if="!register">Completar campos para iniciar sesion</div>
                 <div class="headerDescription" v-else>Completar campos para registro</div>
                 <div class="inputContainers" v-if="!register">
-                    <input type="email" v-model="username" placeholder="Ingrese correo">
+                    <input type="email" v-model="username" required pattern=".+@.+\..+" placeholder="Ingrese correo">
                     <input type="password" v-model="password" placeholder="Ingrese contraseña">
                     <button class="sessionButton" @click="login">Iniciar Sesion</button>
                 </div>
                 <div class="InputContainer" v-else>
-                    <input type="email" v-model="usernameRegister" placeholder="Ingrese correo">
-                    <input type="password" v-model="passwordRegister" placeholder="Ingrese contraseña">
-                    <input type="password" v-model="passwordRegisterConfirmation" placeholder="Ingrese contraseña nuevamente">
-                    <input type="rut" v-model="rutRegister" placeholder="Ingrese rut">
-                    <input type="name" v-model="nameRegister" placeholder="Ingrese su nombre">
-                    <input type="age" v-model="ageRegister" placeholder="Ingrese su edad">
-                    <input type="documentName" v-model="documentNameRegister" placeholder="Ingrese su numero de documento">
-                    <input type="licenceNumber" v-model="licenceNumberRegister" placeholder="Ingrese su numero de licencia de conducir">
+                    <input type="email" v-model="usernameRegister" required pattern=".+@.+\..+" placeholder="Ingrese correo">
+                    <input type="password" v-model="passwordRegister" required placeholder="Ingrese contraseña">
+                    <input type="password" v-model="passwordRegisterConfirmation" required placeholder="Ingrese contraseña nuevamente">
+                    <input type="tel" v-model="rutRegister" required pattern="[0-9]{8}-[0-9k]{1}" placeholder="RUT: 12345678-9">
+                    <input type="name" v-model="nameRegister" required placeholder="Ingrese su nombre">
+                    <input type="number" v-model="ageRegister" required min=18 placeholder="Ingrese su edad">
+                    <input type="documentName" v-model="documentNameRegister" required maxlength=100 placeholder="Ingrese su numero de documento">
+                    <input type="licenceNumber" v-model="licenceNumberRegister" required placeholder="Ingrese su numero de licencia de conducir">
                     <button class="sessionButton" @click="addUser">Registrarse</button>
                 </div>
                 <div class="alsoButtons">
@@ -144,6 +144,18 @@ export default{
 </script>
 
 <style>
+
+input:required {
+  border-color: #800000;
+  border-width: 3px;
+}
+
+input:required:invalid {
+  border-color: #c00000;
+}
+input:required:valid {
+  border-color: #00c000;
+}
 
 
 </style>

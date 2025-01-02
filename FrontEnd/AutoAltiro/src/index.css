@@ -277,6 +277,18 @@ input{
   transition: border 0.2s;
 }
 
+select{
+  height: 50px;
+  box-sizing: border-box;
+
+  padding: 10px !important;
+  font-size: 16px;
+  border-radius: 4px;
+  outline: none;
+  border: #cdcdcd solid 3px;
+  transition: border 0.2s;
+}
+
 input:hover{
   border: #bbbbbb solid 3px;
   transition: border 0.2s;

@@ -104,24 +104,22 @@
     export default{
         methods:{
            //Metodos de redireccionamiento
+           //SECCION CAMBIO DE PERFIL ACTUAL
             menuDeveloper(){
-                //SECCION CAMBIO DE PERFIL ACTUAL
+                
                 RedireccionarAPaginaMenuDeveloper();
             },
             menuAdmin(){
-                //SECCION CAMBIO DE PERFIL ACTUAL
                 redireccionarAPaginaMenuAdmin();
             },
             menuClient(){
-                //SECCION CAMBIO DE PERFIL ACTUAL
                 RedireccionarAPaginaMenuClient();
             },
             menuEmployee(){
-                //SECCION CAMBIO DE PERFIL ACTUAL
                 RedireccionarAPaginaMenuEmployee();
             },
+            //SECCION DE LOGOUT
             logout(){
-                //SECCION DE LOGOUT
                 redireccionarAPaginaPrincipal();
             }
         }

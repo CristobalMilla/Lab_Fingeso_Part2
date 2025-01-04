@@ -1,15 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import homeView from '../views/homeViews.vue';
-import menuAdmin from '../views/menuAdmin.vue';
-import AdminHome from '../views/AdminHome.vue';
-import CustomerHome from '../views/CustomerHome.vue';
-import AddCar from '../views/AddCar.vue';
-import CarStatusSearch from '../views/CarStatusSearch.vue';
-import AdvancedSearch from '../views/AdvancedSearch.vue';
-import Reserve from '../views/Reserve.vue';
-import Vehicles from '../views/Vehicles.vue';
-import ModifyCar from "@/views/modifyCar.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,30 +15,127 @@ const router = createRouter({
             name: 'tipoUsuario',
             component: () => import('../views/userTypeViews.vue'),
         },
+        //Seccion menus
+        {
+            path:'/menuAnon',
+            name: 'menuAnon',
+            component: () => import('../views/menuAnonViews.vue'),
+        },
+        {
+            path:'/menuClient',
+            name: 'menuClient',
+            component: () => import('../views/clientViews.vue'),
+        },
         {
             path:'/menuAdmin',
             name: 'menuAdmin',
-            component: () => import('../views/menuAdmin.vue'),
+            component: () => import('../views/adminViews.vue'),
         },
+        {
+            path:'/menuDeveloper',
+            name: 'menuDeveloper',
+            compoent: () => import('../views/developerViews.vue'),
+        },
+        {
+            path:'/menuEmployee',
+            name: 'menuEmployee',
+            component: () => import('../views/employeeViews.vue'),
+        },
+        //Seccion Anonimo, Cliente, Admin, Empleado
+        {
+            path:'/availableCars',
+            name: 'availableCars',
+            component: () => import('../views/availableCarsViews.vue'),
+        },
+        //Seccion Cliente, Admin, Desarrollador y Empleado
+        {
+            path:'/userSelfEdit',
+            name: 'userSelfEdit',
+            component: () => import('../views/userSelfEditViews.vue'),
+        },
+        //Seccion menu Cliente
+        {
+            path:'/rentCar',
+            name: 'rentCar',
+            component: () => import('../views/userSelfEditViews.vue'),
+        },
+        {
+            path:'/purchaseHistory',
+            name: 'purchaseHistory',
+            component: () => import('../views/purchaseHistoryViews.vue'),
+        },
+        //Seccion menu admin
+        {
+            path:'/records',
+            name: 'records',
+            component: () => import('../views/recordsViews.vue'),
+        },
+        {
+            path:'/adminAddUser',
+            name: 'adminAddUser',
+            component: () => import('../views/adminAddUserViews.vue'),
+        },
+        {
+            path:'/adminEditUser',
+            name: 'adminEditUser',
+            component: () => import('../views/adminEditUserViews.vue'),
+        },
+        {
+            path:'/adminRemoveUser',
+            name: 'adminRemoveUser',
+            component: () => import('../views/adminRemoveUserViews.vue'),
+        },
+        {
+            path:'/adminAddCar',
+            name: 'adminAddCar',
+            component: () => import('../views/adminAddCarViews.vue'),
+        },
+        {
+            path:'/adminEditCar',
+            name: 'adminEditCar',
+            component: () => import('../views/adminEditCarViews.vue'),
+        },
+        {
+            path:'/adminRemoveCar',
+            name: 'adminRemoveCar',
+            component: () => import('../views/adminRemoveCarViews.vue'),
+        },
+        {
+            path:'/adminAddBranch',
+            name: 'adminAddBranch',
+            component: () => import('../views/adminAddBranchViews.vue'),
+        },
+        {
+            path:'/adminEditBranch',
+            name: 'adminEditBranch',
+            component: () => import('../views/adminEditBranchViews.vue'),
+        },
+        {
+            path:'/adminRemoveBranch',
+            name: 'adminRemoveBranch',
+            component: () => import('../views/adminRemoveBranchViews.vue'),
+        },
+        //Seccion Desarrollador
+        //Seccion Empleado
+        {
+            path:'/editDelivery',
+            name: 'editDelivery',
+            component: () => import('../views/editDeliveryViews.vue'),
+        },
+        {
+            path:'/editAvailabilty',
+            name: 'editAvailabilty',
+            component: () => import('../views/editAvailabiltyViews.vue'),
+        },
+        
+        
+
         /*{
             path:'/flota',
             name: 'flota',
             component: () => import('../views/flotaPage.vue'),
         },*/
-        {
-            path: '/consultaFlota',
-            name: 'consultaFlota',
-            component: () => import('../views/consultaFlota.vue'),
-        },
-        { path: '/', name: 'home', component: homeView },
-        { path: '/admin', name: 'adminHome', component: AdminHome },
-        { path: '/customer', name: 'customerHome', component: CustomerHome },
-        { path: '/addCar', name: 'addCar', component: AddCar },
-        { path: '/modifyCar', name: 'modifyCar', component: ModifyCar},
-        { path: '/car-status', name: 'carStatusSearch', component: CarStatusSearch },
-        { path: '/advanced-search', name: 'advancedSearch', component: AdvancedSearch },
-        { path: '/reserve', name: 'reserve', component: Reserve },
-        { path: '/vehicles', name: 'vehicles', component: Vehicles },
+        
       
     ],
 });

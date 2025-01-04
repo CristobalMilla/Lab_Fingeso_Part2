@@ -1,10 +1,11 @@
 -- Crear comprobante
   DROP TABLE if exists comprobante CASCADE;
 CREATE TABLE comprobante (
-  id BIGINT PRIMARY KEY
- -- fecha Date NOT NULL,
-  --monto double precision  NOT NULL,
-  --metodoPago char(8) NOT NULL
+  id Serial PRIMARY KEY,
+  fecha Date NOT NULL,
+  monto double precision  NOT NULL,
+  metodoPago char(8) NOT NULL,
+  recibo varchar(30) NOT NULL
 );
   -- Crear usuario
   DROP TABLE if exists usuario CASCADE;
@@ -146,19 +147,26 @@ VALUES
   ('Administrador', 9),
   ('Cliente', 10);
 -- Poblar tabla comprobante
-INSERT INTO comprobante (id) VALUES
-(1),
-(2),
-(3);
+INSERT INTO comprobante (fecha, monto, metodoPago, recibo) VALUES
+('2024-12-31', 11534, 'efectivo', 'RCB-7452'),  -- Toyota Aygo
+('2024-01-31', 17231, 'débito', 'RCB-1893'),   -- Fiat 500
+('2025-02-28', 24123, 'crédito', 'RCB-5271'),  -- Opel Corsa
+('2024-03-31', 15231, 'efectivo', 'RCB-6342'), -- Audi A1
+('2025-04-29', 18502, 'débito', 'RCB-9931'),   -- Kia Cee'd
+('2024-05-31', 23754, 'crédito', 'RCB-2745'),  -- Mercedes A Class
+('2025-06-30', 16635, 'efectivo', 'RCB-8764'), -- Citroen DS4
+('2024-07-31', 19987, 'débito', 'RCB-4932'),   -- Mercedes B Class
+('2025-08-30', 24101, 'crédito', 'RCB-1685'),  -- Ford Mondeo
+('2024-09-30', 23837, 'efectivo', 'RCB-3107'); -- Volkswagen Passat
 -- Poblar tabla arriendo
 INSERT INTO arriendo ( fechaInicio, fechaFin, costoTotal, estado, cliente, vehiculo, sucursalRecogida, sucursalDevolucion, comprobante) VALUES
-  ( '2024-01-01', '2024-01-10', 100.50, 'en uso', 1, 1, 1, 2, 1),
-  ( '2024-02-01', '2024-02-15', 150.75, 'terminado', 2, 2, 2, 3, 2),
-  ( '2024-03-01', '2024-03-10', 200.00, 'en uso', 3, 3, 3, 4, 3),
-  ( '2024-04-01', '2024-04-05', 80.30, 'terminado', 4, 4, 4, 5, 1),
-  ( '2024-05-01', '2024-05-07', 120.60, 'en uso', 5, 5, 5, 6, 2),
-  ( '2024-06-01', '2024-06-10', 180.90, 'terminado', 6, 6, 6, 7, 3),
-  ( '2024-07-01', '2024-07-15', 250.00, 'en uso', 7, 7, 7, 8, 1),
-  ( '2024-08-01', '2024-08-10', 300.00, 'terminado', 8, 8, 8, 9, 2),
-  ( '2024-09-01', '2024-09-07', 110.50, 'en uso', 9, 9, 9, 10, 3),
-  ( '2024-10-01', '2024-10-15', 90.75, 'terminado', 10, 10, 10, 1, 1);
+  ( '2025-01-01', '2025-01-10', 100.50, 'en uso', 1, 1, 1, 2, 1),  -- Toyota Aygo
+  ( '2024-02-01', '2024-02-15', 150.75, 'terminado', 2, 2, 2, 3, 2), -- Fiat 500
+  ( '2025-03-01', '2025-03-10', 200.00, 'retirar', 3, 3, 3, 4, 3), -- Opel Corsa
+  ( '2024-04-01', '2024-04-05', 80.30, 'terminado', 4, 4, 4, 5, 1), -- Audi A1
+  ( '2025-05-01', '2025-05-07', 120.60, 'retirar', 5, 5, 5, 6, 2), -- Kia Cee'd
+  ( '2024-06-01', '2024-06-10', 180.90, 'terminado', 6, 6, 6, 7, 3), -- Mercedes A Class
+  ( '2025-07-01', '2025-07-15', 250.00, 'retirar', 7, 7, 7, 8, 1), -- Citroen DS4
+  ( '2024-08-01', '2024-08-10', 300.00, 'terminado', 8, 8, 8, 9, 2), -- Mercedes B Class
+  ( '2025-09-01', '2025-09-07', 110.50, 'retirar', 9, 9, 9, 10, 3), -- Ford Mondeo
+  ( '2024-10-01', '2024-10-15', 90.75, 'terminado', 10, 10, 10, 1, 1); -- Volkswagen Passat

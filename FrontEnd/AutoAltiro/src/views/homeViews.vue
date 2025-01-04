@@ -51,7 +51,7 @@ function redireccionarAPaginaSeleccionTipoUsuario(){
 }
 //Usuario Anonimo
 function redireccionarAPaginaUsuarioAnonimo(){
-    window.location.href = '/consultaFlota';
+    window.location.href = '/menuAnon';
     
 }
 

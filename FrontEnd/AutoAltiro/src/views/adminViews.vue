@@ -153,7 +153,7 @@
                         "perfilactual": "Usuario"
 
                     }
-                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/cambiarPerfil/", usuarioPerfilNuevo);
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/cambiarPerfil/", usuarioPerfilNuevo);
                     console.log(registro);
                     redireccionarAPaginaSeleccionTipoUsuario();
                 } catch (error) {

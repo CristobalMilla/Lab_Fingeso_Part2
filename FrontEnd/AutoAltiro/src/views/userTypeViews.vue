@@ -112,7 +112,7 @@
                         "correo": correoActual.data,
                         "perfilactual": "Desarrollador"
                     }
-                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/cambiarPerfil/", usuarioPerfilNuevo);
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/cambiarPerfil/", usuarioPerfilNuevo);
                     console.log(registro);
                     RedireccionarAPaginaMenuDeveloper();
                 } catch (error) {
@@ -126,7 +126,7 @@
                         "correo": correoActual.data,
                         "perfilactual": "Administrador"
                     }
-                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/cambiarPerfil/", usuarioPerfilNuevo);
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/cambiarPerfil/", usuarioPerfilNuevo);
                     console.log(registro);
                     redireccionarAPaginaMenuAdmin();
                 } catch (error) {
@@ -140,7 +140,7 @@
                         "correo": correoActual.data,
                         "perfilactual": "Cliente"
                     }
-                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/cambiarPerfil/", usuarioPerfilNuevo);
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/cambiarPerfil/", usuarioPerfilNuevo);
                     console.log(registro);
                     RedireccionarAPaginaMenuClient();
                 } catch (error) {
@@ -154,7 +154,7 @@
                         "correo": correoActual.data,
                         "perfilactual": "Empleado"
                     }
-                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/cambiarPerfil/", usuarioPerfilNuevo);
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/cambiarPerfil/", usuarioPerfilNuevo);
                     console.log(registro);
                     RedireccionarAPaginaMenuEmployee();
                 } catch (error) {

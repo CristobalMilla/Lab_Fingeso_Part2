@@ -105,10 +105,14 @@ export default{
             this.register = !this.register
             console.log(this.register)
         },
-        anonimo(){
-            this.username = "anonimo"
-            redireccionarAPaginaUsuarioAnonimo();
-            localStorage.setItem("login", JSON.stringify(this.username));
+        async anonimo(){
+            try {
+                const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/loginAnonimo");
+                redireccionarAPaginaUsuarioAnonimo();
+            } catch (error) {
+                alert(error);
+            }
+                
         },
         async addUser(){
             //Envio de datos a BackEnd

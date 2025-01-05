@@ -1,4 +1,6 @@
 <script setup>
+
+
 </script>
 
 
@@ -46,23 +48,49 @@
 </template>
 
 <script>
+    import axios from 'axios';
     //Redireccionamiento
+    //Records
+    function redireccionarAPaginaRecords(){
+        window.location.href = '/records';
+    }
     //Add car
     function redireccionarAPaginaAddCar(){
-        window.location.href = '/addCar';
+        window.location.href = '/adminAddCar';
     }
     //Edit Car
-    function redireccionarAPaginaModifyCar(){
-        window.location.href = '/modifyCar';
+    function redireccionarAPaginaEditCar(){
+        window.location.href = '/adminEditUser';
     }
-    //Erase Car
-    function redireccionarAPaginaEraseCar(){
-        window.location.href = '/eraseCar';
+    //Remove Car
+    function redireccionarAPaginaRemoveCar(){
+        window.location.href = '/adminRemoveUser';
     }
-    //Recepcion
-    function redireccionarAPaginaDisponibilidad(){
-        window.location.href = '/disponibilidad';
+    //Add User
+    function redireccionarAPaginaAddUser(){
+        window.location.href = '/adminAddUser';
     }
+    //Edit User
+    function redireccionarAPaginaEditUser(){
+        window.location.href = '/adminEditUser';
+    }
+    //Remove User
+    function redireccionarAPaginaRemoveUser(){
+        window.location.href = '/adminRemoveUser';
+    }
+    //Add Branch
+    function redireccionarAPaginaAddBranch(){
+        window.location.href = '/adminAddBranch';
+    }
+    //Edit Branch
+    function redireccionarAPaginaEditBranch(){
+        window.location.href = '/adminEditBranch';
+    }
+    //Remove Branch
+    function redireccionarAPaginaRemoveBranch(){
+        window.location.href = '/adminRemoveBranch';
+    }
+    
     //Volver a pagina anterior
     function redireccionarAPaginaSeleccionTipoUsuario(){
         window.location.href = '/tipoUsuario';
@@ -80,29 +108,67 @@
           }
         },
         methods:{
+            //Redireccion a historial
+            records(){
+                redireccionarAPaginaRecords();
+            },
+            //Redireccion a menus de modificacion
             addCar(){
                 redireccionarAPaginaAddCar();
             },
             editCar(){
-                redireccionarAPaginaModifyCar();
+                redireccionarAPaginaEditCar();
             },
-            eraseCar(){
-                redireccionarAPaginaEraseCar();
+            removeCar(){
+                redireccionarAPaginaRemoveCar();
             },
-            recepcion(){
-                redireccionarAPaginaDisponibilidad();
+            addUser(){
+                redireccionarAPaginaAddUser();
+            },
+            editUser(){
+                redireccionarAPaginaEditUser();
+            },
+            removeUser(){
+                redireccionarAPaginaRemoveUser();
+            },
+            addBranch(){
+                redireccionarAPaginaAddBranch();
+            },
+            editBranch(){
+                redireccionarAPaginaEditBranch();
+            },
+            removeBranch(){
+                redireccionarAPaginaRemoveBranch();
             },
             handleChangeFlota(){
                 this.changeFlota = !this.changeFlota
                 console.log(this.register)
             },
-            returnAdmin(){
+            async returnAdmin(){
                 //SECCION DE RETURN A TIPO USUARIO
-                redireccionarAPaginaSeleccionTipoUsuario();
+                try {
+                    const correoActual = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/correo");
+                    const usuarioPerfilNuevo = {
+                        "correo": correoActual.data,
+                        "perfilactual": "Usuario"
+
+                    }
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/cambiarPerfil/", usuarioPerfilNuevo);
+                    console.log(registro);
+                    redireccionarAPaginaSeleccionTipoUsuario();
+                } catch (error) {
+                    alert(error);
+                } 
             },
-            logout(){
+            async logout(){
                 //SECCION DE LOGOUT
-                redireccionarAPaginaPrincipal();
+                try {
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/logout/");
+                    console.log(registro);
+                    redireccionarAPaginaPrincipal();
+                } catch (error) {
+                    alert(error);
+                }
             }
         }
     }

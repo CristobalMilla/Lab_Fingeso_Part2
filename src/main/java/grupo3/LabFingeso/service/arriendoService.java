@@ -1,9 +1,9 @@
 package grupo3.LabFingeso.service;
 
 import grupo3.LabFingeso.entity.arriendoEntity;
-import grupo3.LabFingeso.entity.vehiculoEntity;
+import grupo3.LabFingeso.entity.comprobanteEntity;
 import grupo3.LabFingeso.repository.arriendoRepository;
-import grupo3.LabFingeso.repository.usuarioRepository;
+import grupo3.LabFingeso.repository.sucursalRepository;
 import grupo3.LabFingeso.repository.vehiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +20,23 @@ public class arriendoService {
     private vehiculoRepository vehiculoRepo;
 
     @Autowired
-    private usuarioRepository usuarioRepo;
+    private sucursalRepository sucursalRepo;
 
-    public arriendoService(arriendoRepository arriendoRepo, vehiculoRepository vehiculoRepo, usuarioRepository usuarioRepo) {
+    @Autowired
+    private usuarioService usuarioService;
+
+    @Autowired
+    private comprobanteService comprService;
+
+    private arriendoEntity arriendoEnProceso;
+
+    public arriendoService(arriendoRepository arriendoRepo, vehiculoRepository vehiculoRepo, usuarioService usuarioService, comprobanteService comprService, sucursalRepository sucursalRepo) {
         this.arriendoRepo = arriendoRepo;
         this.vehiculoRepo = vehiculoRepo;
-        this.usuarioRepo = usuarioRepo;
+        this.usuarioService = usuarioService;
+        this.comprService = comprService;
+        this.sucursalRepo = sucursalRepo;
+        arriendoEnProceso = null;
     }
 
     private boolean esPeriodoValido(Date fechaInicio, Date fechaFin){
@@ -49,7 +60,6 @@ public class arriendoService {
                 }
             }
         }
-        System.out.println("B3");
         return false;
     }
 
@@ -63,36 +73,87 @@ public class arriendoService {
         return false;
     }
 
-    public arriendoEntity arrendar(arriendoEntity nuevoArriendo, long idUsuario, long idVehiculo, long idComprobante) {
+    public int arriendoPaso1(long idVehiculo, arriendoEntity arriendoFechas){
         try {
-            if(vehiculoRepo.findById(idUsuario).orElse(null) == null){
-                return null;// no "existe" el usuario ingresado
+            if(usuarioService.getUsuarioActual() == null){
+                return 0;// usuario no esta logueado
             }
             if(vehiculoRepo.findByIdIfExist(idVehiculo) == null){
-                return null;// no "existe" el vehiculo en la bd
+                return 2;// no "existe" el vehiculo en la bd
             }
             if(!(vehiculoRepo.findByIdIfExist(idVehiculo).getEstado().equalsIgnoreCase("disponible"))){
-                return null;// si no esta disponible
+                return 3;// si no esta disponible
             }
-            if(usuarioTieneArriendoActivo(idUsuario)){
-                return null;// se pasa de los 30 dias
+            if(usuarioTieneArriendoActivo(usuarioService.getUsuarioActual().getIdUsuario())){
+                return 4;// si tiene arriendos activos
             }
-            if(comprobarFechasOtrosArriendos(nuevoArriendo, idVehiculo)){
-                return null;// si es que el vehiculo no esta reservado entre las fechas
+            if(comprobarFechasOtrosArriendos(arriendoFechas, idVehiculo)){
+                return 5;// si es que el vehiculo no esta reservado entre las fechas
             }
-            if(!(esPeriodoValido(nuevoArriendo.getFechainicio(), nuevoArriendo.getFechafin()))){ // si el usuario tiene arriendo activo
-                return null;
+            if(!(esPeriodoValido(arriendoFechas.getFechainicio(), arriendoFechas.getFechafin()))){
+                return 6;// si se pasa de los 30 dias
             }
             else {
-                nuevoArriendo.setCliente(usuarioRepo.findById(idUsuario).orElse(null));
-                nuevoArriendo.setVehiculo(vehiculoRepo.findByIdIfExist(idVehiculo));
-                return arriendoRepo.save(nuevoArriendo);
+                arriendoEnProceso = new arriendoEntity();
+                arriendoEnProceso.setCliente(usuarioService.getUsuarioById(usuarioService.getIdUsuarioActual()));
+                arriendoEnProceso.setVehiculo(vehiculoRepo.findByIdIfExist(idVehiculo));
+                arriendoEnProceso.setSucursalrecogida(vehiculoRepo.findByIdIfExist(idVehiculo).getSucursal());
+                arriendoEnProceso.setFechafin(arriendoFechas.getFechafin());
+                arriendoEnProceso.setFechainicio(arriendoFechas.getFechainicio());
+                return 1;
             }
         }
         catch(Exception e){
-            return null;
+            arriendoEnProceso = null;
+            return 0;
         }
     }
+
+    public int arriendoPaso2(){
+        try{
+            if(/*Aprobar Pago*/!true || arriendoEnProceso == null
+                    || arriendoEnProceso.getCliente().getIdusuario() != usuarioService.getUsuarioActual().getIdUsuario()){
+                return 0;
+            }
+            return 1;
+        }
+        catch (Exception e){
+            return 0;
+        }
+    }
+    public int arriendoPaso3(long idSucursalFinal, Date fechaCompra){
+        try{
+            if(arriendoEnProceso == null){
+                return 0;
+            }
+            else if(arriendoEnProceso.getCliente().getIdusuario() != usuarioService.getUsuarioActual().getIdUsuario()){
+                arriendoEnProceso = null;
+                return 0;
+            }
+            if(idSucursalFinal > 0){
+                arriendoEnProceso.setSucursaldevolucion(sucursalRepo.findByIdIfExist(idSucursalFinal));
+            }
+            double costoTotal = arriendoEnProceso.getVehiculo().getPreciobase(); // + algo no me acuerdo
+            comprobanteEntity comprobante = new comprobanteEntity();
+            comprobante.setFecha(fechaCompra);
+            comprobante.setRecibo("RCB-" + arriendoEnProceso.getVehiculo().getIdvehiculo() + usuarioService.getUsuarioActual().getNombreusuario());
+            comprobante.setMetodopago("débito");
+            comprobante.setMonto(costoTotal);
+            comprService.save(comprobante);
+            arriendoEnProceso.setEstado("retirar");
+            arriendoEnProceso.setCostototal(costoTotal);
+            arriendoEnProceso.setComprobante(comprobante);
+            arriendoRepo.save(arriendoEnProceso);
+            arriendoEnProceso = null;
+            return 1;
+
+        }
+        catch (Exception e){
+            arriendoEnProceso = null;
+            return 0;
+        }
+    }
+
 
     public List<arriendoEntity> getArriendoByidCliente(long idUsuario){
         try {

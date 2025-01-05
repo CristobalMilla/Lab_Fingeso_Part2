@@ -32,6 +32,11 @@ public class usuarioController {
         return usuarioService.login(x.getCorreo(), x.getContrasena());
     }
 
+    @PutMapping("/logout/")
+    public int logout(){
+        return usuarioService.logout();
+    }
+
     @PutMapping("/elegirPerfil/")
     public void elegirPerfil(@RequestBody usuarioEntity x){
         usuarioService.elegirPerfil(x.getCorreo(), x.getPerfilactual());
@@ -110,5 +115,15 @@ public class usuarioController {
     @GetMapping("/usuarioActual/perfilActual")
     public String getPerfilUsuarioActual(){
         return usuarioService.getPerfilUsuarioActual();
+    }
+
+    @GetMapping("/usuarioActual/correo")
+    public String getCorreoUsuarioActual(){
+        return usuarioService.getCorreoUsuarioActual();
+    }
+
+    @PutMapping("/loginAnonimo")
+    public int anonymousLogin(){
+        return usuarioService.anonymousLogin();
     }
 }

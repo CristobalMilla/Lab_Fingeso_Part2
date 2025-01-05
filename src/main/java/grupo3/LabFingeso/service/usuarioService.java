@@ -13,6 +13,7 @@ public class usuarioService {
     @Autowired
     private final usuarioRepository usuarioRepo;
 
+
     private usuarioActualEntity usuarioActualSesion;
 
     public usuarioService(usuarioRepository usuarioRepo) {
@@ -46,6 +47,7 @@ public class usuarioService {
                 try {
                     usuarioActualSesion.setIdUsuario(usuarioActual.getIdusuario());
                     usuarioActualSesion.setNombreusuario(usuarioActual.getNombre());
+                    usuarioActualSesion.setCorreoUsuario(usuarioActual.getCorreo());
                     return 1;
                 }
                 catch (Exception e){
@@ -62,13 +64,28 @@ public class usuarioService {
         }
     }
 
+    public int logout(){
+        try{
+            usuarioEntity usuarioActual = getUsuarioById(this.usuarioActualSesion.getIdUsuario());
+            usuarioActual.setPerfilactual(null);
+            this.usuarioActualSesion = new usuarioActualEntity();
+            this.usuarioRepo.save(usuarioActual);
+            return 1;
+        }
+        catch (Exception e){
+            return 0;
+        }
+    }
 
     public void elegirPerfil(String correo, String cambioPerfil) {
         usuarioEntity usuario = usuarioRepo.findByCorreo(correo);
         List<String> perfilesDisponibles = usuario.getPerfilesdisponibles();
 
         try{
-            if(cambioPerfil.equals("Desarrollador") || cambioPerfil.equals("Administrador") || cambioPerfil.equals("Empleado") || cambioPerfil.equals("Cliente") || cambioPerfil.equals("Usuario")){
+            if(cambioPerfil.equalsIgnoreCase("Desarrollador") || cambioPerfil.equalsIgnoreCase("Administrador")
+                    || cambioPerfil.equalsIgnoreCase("Empleado") || cambioPerfil.equalsIgnoreCase("Cliente")
+                    || cambioPerfil.equalsIgnoreCase("Usuario")){
+
                 try {
                     if (perfilesDisponibles.contains(cambioPerfil)) {
                         usuario.setPerfilactual(cambioPerfil);
@@ -89,7 +106,10 @@ public class usuarioService {
         List<String> perfilesDisponibles = usuario.getPerfilesdisponibles();
 
         try{
-            if(cambioPerfil.equals("Desarrollador") || cambioPerfil.equals("Administrador") || cambioPerfil.equals("Empleado") || cambioPerfil.equals("Cliente") || cambioPerfil.equals("Usuario")){
+            if(cambioPerfil.equalsIgnoreCase("Desarrollador") || cambioPerfil.equalsIgnoreCase("Administrador")
+                    || cambioPerfil.equalsIgnoreCase("Empleado") || cambioPerfil.equalsIgnoreCase("Cliente")
+                    || cambioPerfil.equalsIgnoreCase("Usuario")){
+
                 try {
                     if (perfilesDisponibles.contains(cambioPerfil)) {
                         usuario.setPerfilactual(cambioPerfil);
@@ -110,7 +130,8 @@ public class usuarioService {
         usuarioEntity usuarioActual = usuarioRepo.findByCorreo(correoHabilitador);
 
         try{
-            if(agregarPerfil.equals("Cliente") || agregarPerfil.equals("Administrador") || agregarPerfil.equals("Empleado")|| agregarPerfil.equals("Desarrollador")){
+            if(agregarPerfil.equalsIgnoreCase("Cliente") || agregarPerfil.equalsIgnoreCase("Administrador")
+                    || agregarPerfil.equalsIgnoreCase("Empleado")|| agregarPerfil.equalsIgnoreCase("Desarrollador")){
                 try {
                     if (usuarioActual.getPerfilactual().equals("Administrador") || usuarioActual.getPerfilactual().equals("Desarrollador")) {
                         try {
@@ -193,7 +214,23 @@ public class usuarioService {
         return usuarioActualSesion.getPerfilactual();
     }
 
+    public String getCorreoUsuarioActual(){
+        return usuarioActualSesion.getCorreoUsuario();
+    }
 
+    public int anonymousLogin(){
+        try {
+            usuarioActualSesion = new usuarioActualEntity();
+            usuarioActualSesion.setCorreoUsuario("");
+            usuarioActualSesion.setPerfilactual("Anonimo");
+            usuarioActualSesion.setNombreusuario("Anonimo");
+            return 1;
+        }
+        catch (Exception e){
+            return 0;
+        }
+
+    }
 }
 
 

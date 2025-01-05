@@ -3,22 +3,24 @@ package grupo3.LabFingeso.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity
+
 public class usuarioActualEntity {
-    @Id
+
     private long idUsuario;
     private String nombreusuario;
     private String perfilactual;
+    private String correoUsuario;
 
     // Constructor
 
-    public usuarioActualEntity(long idUsuario, String nombreusuario, String perfilactual) {
+    public usuarioActualEntity(long idUsuario, String nombreusuario, String perfilactual, String correoUsuario) {
         this.idUsuario = idUsuario;
         this.nombreusuario = nombreusuario;
         this.perfilactual = perfilactual;
+        this.correoUsuario = correoUsuario;
     }
 
-    public usuarioActualEntity(){
+    public usuarioActualEntity() {
 
     }
 
@@ -36,6 +38,10 @@ public class usuarioActualEntity {
         return perfilactual;
     }
 
+    public String getCorreoUsuario() {
+        return correoUsuario;
+    }
+
     // SETTERS
 
     public void setIdUsuario(long idUsuario) {
@@ -48,5 +54,9 @@ public class usuarioActualEntity {
 
     public void setPerfilactual(String perfilactual) {
         this.perfilactual = perfilactual;
+    }
+
+    public void setCorreoUsuario(String correoUsuario) {
+        this.correoUsuario = correoUsuario;
     }
 }

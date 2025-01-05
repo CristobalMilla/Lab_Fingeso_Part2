@@ -100,7 +100,9 @@ public class vehiculoService {
     public List<vehiculoEntity> getAllVehiculos(){
         return vehiculoRepo.findAllThatExists();
     }
-
+    public List<vehiculoEntity> getVehiculosAvailables() {
+        return vehiculoRepo.findAllByEstado("Disponible");
+    }
     public boolean eliminateVehiculoById(long idVehiculo){
         if(vehiculoRepo.findByIdIfExist(idVehiculo) != null){
             try {

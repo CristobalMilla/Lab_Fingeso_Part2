@@ -1,10 +1,6 @@
 package grupo3.LabFingeso.entity;
 
 import java.util.Date;
-//import grupo3.LabFingeso.entity.arriendoEntity;
-//import com.fasterxml.jackson.annotation.JsonBackReference;
-//import com.fasterxml.jackson.annotation.JsonManagedReference;
-import grupo3.LabFingeso.entity.pagoEntity;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -24,7 +20,7 @@ public class comprobanteEntity {
     
     private Date fecha;
     private double monto;
-    private String metodoPago;
+    private String metodopago;
     private String recibo;
     
     //ver dependencias circulares (?)
@@ -35,8 +31,4 @@ public class comprobanteEntity {
     private arriendoEntity arriendo;
     */
 
-    @OneToOne
-    @JoinColumn(name = "pago_id")
-    //@JsonBackReference
-    private pagoEntity pago;
 }

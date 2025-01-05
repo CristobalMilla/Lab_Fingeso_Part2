@@ -18,6 +18,9 @@ public interface vehiculoRepository extends JpaRepository<vehiculoEntity, Long> 
 
     List<vehiculoEntity> findAllByEstado(String estado);
 
+    @Query(value = "SELECT * FROM vehiculo WHERE idsucursal=:idsucursal AND existevehiculo = true", nativeQuery = true)
+    List<vehiculoEntity> findAllBySucursalId(@Param("idsucursal") long idSucursal);
+
     @Query(value = "UPDATE vehiculo SET existevehiculo = false WHERE idvehiculo = :idvehiculo AND existevehiculo = true", nativeQuery = true)
     boolean deleteById(long idvehiculo);
 }

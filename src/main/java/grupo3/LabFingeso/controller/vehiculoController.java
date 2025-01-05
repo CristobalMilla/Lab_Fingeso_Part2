@@ -39,6 +39,11 @@ public class vehiculoController {
         return serviceVehiculo.getVehiculosAvailables();
     }
 
+    @GetMapping("/disponibles/{idSucursal}")
+    public List<vehiculoEntity> getVehiculosSucursal(@PathVariable long idSucursal){
+        return serviceVehiculo.getVehiculosBySucursalId(idSucursal);
+    }
+
     @PutMapping("/actualizarVehiculo/{idVehiculo}")
     public int updateVehiculo(@PathVariable long idVehiculo, @RequestBody vehiculoEntity vehiculoModificado){
         return serviceVehiculo.updateVehiculo(idVehiculo, vehiculoModificado);

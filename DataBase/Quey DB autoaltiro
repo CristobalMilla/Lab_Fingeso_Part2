@@ -4,7 +4,7 @@ CREATE TABLE comprobante (
   id Serial PRIMARY KEY,
   fecha Date NOT NULL,
   monto double precision  NOT NULL,
-  metodoPago char(8) NOT NULL,
+  metodopago char(8) NOT NULL,
   recibo varchar(30) NOT NULL
 );
   -- Crear usuario
@@ -147,7 +147,7 @@ VALUES
   ('Administrador', 9),
   ('Cliente', 10);
 -- Poblar tabla comprobante
-INSERT INTO comprobante (fecha, monto, metodoPago, recibo) VALUES
+INSERT INTO comprobante (fecha, monto, metodopago, recibo) VALUES
 ('2024-12-31', 11534, 'efectivo', 'RCB-7452'),  -- Toyota Aygo
 ('2024-01-31', 17231, 'débito', 'RCB-1893'),   -- Fiat 500
 ('2025-02-28', 24123, 'crédito', 'RCB-5271'),  -- Opel Corsa

@@ -23,10 +23,10 @@ public class vehiculoService {
     public vehiculoEntity cambiarDisponibilidad(long idVehiculo, String estado){
         vehiculoEntity vehiculo = vehiculoRepo.findByIdIfExist(idVehiculo);
         if(vehiculo != null){
-            vehiculo.setEstado(estado);
             if(estado.equalsIgnoreCase("disponible")
             || estado.equalsIgnoreCase("ocupado")
             || estado.equalsIgnoreCase("mantenimiento")) {
+                vehiculo.setEstado(estado);
                 return vehiculoRepo.save(vehiculo);
             }
         }
@@ -103,9 +103,13 @@ public class vehiculoService {
     public List<vehiculoEntity> getVehiculosAvailables() {
         return vehiculoRepo.findAllByEstado("Disponible");
     }
+    public List<vehiculoEntity> getVehiculosBySucursalId(long idSucursal) {
+        return vehiculoRepo.findAllBySucursalId(idSucursal);
+    }
     public boolean eliminateVehiculoById(long idVehiculo){
         if(vehiculoRepo.findByIdIfExist(idVehiculo) != null){
             try {
+                System.out.println(idVehiculo);
                 vehiculoRepo.deleteById(idVehiculo);
                 return true;
             }

@@ -139,9 +139,9 @@ public class arriendoService {
             comprobante.setRecibo("RCB-" + arriendoEnProceso.getVehiculo().getIdvehiculo() + usuarioService.getUsuarioActual().getNombreusuario());
             comprobante.setMetodopago("débito");
             comprobante.setMonto(costoTotal);
-            comprService.save(comprobante);
             arriendoEnProceso.setEstado("retirar");
             arriendoEnProceso.setCostototal(costoTotal);
+            comprService.save(comprobante);
             arriendoEnProceso.setComprobante(comprobante);
             arriendoRepo.save(arriendoEnProceso);
             arriendoEnProceso = null;
@@ -174,6 +174,23 @@ public class arriendoService {
 
     public arriendoEntity updateArriendo(arriendoEntity arriendoModificado){
         return arriendoRepo.save(arriendoModificado);
+    }
+
+    public int updateEstadoArriendo(long idArriendo, String nuevoEstado){
+        try{
+            arriendoEntity arriendoExistente = arriendoRepo.findById(idArriendo).orElse(null);
+            if(arriendoExistente == null){
+                return 0;
+            }
+            else{
+                arriendoExistente.setEstado(nuevoEstado);
+                arriendoRepo.save(arriendoExistente);
+                return 1;
+            }
+        }
+        catch (Exception e){
+            return 0;
+        }
     }
 
     public boolean eliminateArriendoById(long idArriendo){

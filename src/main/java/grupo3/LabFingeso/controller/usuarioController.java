@@ -92,9 +92,9 @@ public class usuarioController {
     }
      */
 
-    @DeleteMapping("/eliminarUsuario;")
-    public void deleteUsuarioById(@RequestParam long idUsuario){
-        usuarioService.deleteUsuarioById(idUsuario);
+    @DeleteMapping("/eliminarUsuario")
+    public boolean deleteUsuarioById(@RequestParam long idUsuario){
+        return usuarioService.deleteUsuarioById(idUsuario);
     }
 
     @GetMapping("/usuarioActual")

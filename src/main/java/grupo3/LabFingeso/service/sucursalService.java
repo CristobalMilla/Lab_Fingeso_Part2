@@ -41,10 +41,11 @@ public class sucursalService {
     public boolean eliminateSucursalById(long idSucursal){
         if(sucursalRepo.findById(idSucursal).orElse(null) != null){
             try {
-                sucursalRepo.deleteById(idSucursal);
+                sucursalRepo.deleteByIdIfExist(idSucursal);
                 return true;
             }
             catch (Exception e){
+                System.out.println(e.getMessage());
                 return false;
             }
         }

@@ -125,7 +125,7 @@ const router = createRouter({
         {
             path:'/editAvailabilty',
             name: 'editAvailabilty',
-            component: () => import('../views/editAvailabiltyViews.vue'),
+            component: () => import('../views/editAvailabilityViews.vue'),
         },
         
         

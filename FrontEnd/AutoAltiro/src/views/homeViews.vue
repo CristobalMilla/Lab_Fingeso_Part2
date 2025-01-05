@@ -29,7 +29,7 @@
                 <div class="alsoButtons">
                     <div class="alsoButton" @click="handleChange" v-if="!register">Registrarse</div>
                     <div class="alsoButton" @click="handleChange" v-else>Iniciar Sesion</div>
-                    <router-link to="/anonimo">
+                    <router-link to="/menuAnon">
                         <div class="alsoButton" @click="handleChange">Ingresar sin iniciar sesion</div>
                     </router-link>
                 </div>

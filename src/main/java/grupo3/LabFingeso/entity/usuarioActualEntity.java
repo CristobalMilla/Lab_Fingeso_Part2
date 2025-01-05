@@ -3,9 +3,9 @@ package grupo3.LabFingeso.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity
+
 public class usuarioActualEntity {
-    @Id
+
     private long idUsuario;
     private String nombreusuario;
     private String perfilactual;

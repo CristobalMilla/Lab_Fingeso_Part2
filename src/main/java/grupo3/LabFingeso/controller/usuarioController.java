@@ -121,4 +121,9 @@ public class usuarioController {
     public String getCorreoUsuarioActual(){
         return usuarioService.getCorreoUsuarioActual();
     }
+
+    @PutMapping("/loginAnonimo")
+    public int anonymousLogin(){
+        return usuarioService.anonymousLogin();
+    }
 }

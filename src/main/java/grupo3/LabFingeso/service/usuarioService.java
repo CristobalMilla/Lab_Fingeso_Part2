@@ -13,6 +13,7 @@ public class usuarioService {
     @Autowired
     private final usuarioRepository usuarioRepo;
 
+
     private usuarioActualEntity usuarioActualSesion;
 
     public usuarioService(usuarioRepository usuarioRepo) {
@@ -67,7 +68,7 @@ public class usuarioService {
         try{
             usuarioEntity usuarioActual = getUsuarioById(this.usuarioActualSesion.getIdUsuario());
             usuarioActual.setPerfilactual(null);
-            this.usuarioActualSesion = null;
+            this.usuarioActualSesion = new usuarioActualEntity();
             this.usuarioRepo.save(usuarioActual);
             return 1;
         }
@@ -217,6 +218,19 @@ public class usuarioService {
         return usuarioActualSesion.getCorreoUsuario();
     }
 
+    public int anonymousLogin(){
+        try {
+            usuarioActualSesion = new usuarioActualEntity();
+            usuarioActualSesion.setCorreoUsuario("");
+            usuarioActualSesion.setPerfilactual("Anonimo");
+            usuarioActualSesion.setNombreusuario("Anonimo");
+            return 1;
+        }
+        catch (Exception e){
+            return 0;
+        }
+
+    }
 }
 
 

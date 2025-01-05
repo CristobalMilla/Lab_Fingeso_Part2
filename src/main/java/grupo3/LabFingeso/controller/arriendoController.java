@@ -5,6 +5,7 @@ import grupo3.LabFingeso.service.arriendoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -14,9 +15,19 @@ public class arriendoController {
     @Autowired
     private arriendoService serviceArriendo;
 
-    @PostMapping("/arrendarVehiculo")
-    public arriendoEntity arrendar(@RequestBody arriendoEntity nuevoArriendo, @RequestParam long idusuario, @RequestParam long idvehiculo, @RequestParam long idcomprobante){
-        return serviceArriendo.arrendar(nuevoArriendo, idusuario, idvehiculo, idcomprobante);
+    @PostMapping("/paso1/{idVehiculo}")
+    public int arriendoPaso1(@PathVariable int idVehiculo, @RequestBody arriendoEntity arriendoFechas){
+        return serviceArriendo.arriendoPaso1(idVehiculo, arriendoFechas);
+    }
+
+    @PostMapping("/paso2")
+    public int arriendoPaso2(){
+        return serviceArriendo.arriendoPaso2();
+    }
+
+    @PostMapping("/paso3")
+    public int arriendoPaso3(@RequestParam int idSucursalFinal, @RequestBody Date fechaCompra){
+        return serviceArriendo.arriendoPaso3(idSucursalFinal, fechaCompra);
     }
 
     @GetMapping("/obtenerPorCliente")

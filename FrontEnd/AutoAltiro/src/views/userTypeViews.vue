@@ -105,22 +105,71 @@
         methods:{
            //Metodos de redireccionamiento
            //SECCION CAMBIO DE PERFIL ACTUAL
-            menuDeveloper(){
-                
-                RedireccionarAPaginaMenuDeveloper();
+            async menuDeveloper(){
+                try {
+                    const correoActual = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/correo");
+                    const usuarioPerfilNuevo = {
+                        "correo": correoActual.data,
+                        "perfilactual": "Desarrollador"
+                    }
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/cambiarPerfil/", usuarioPerfilNuevo);
+                    console.log(registro);
+                    RedireccionarAPaginaMenuDeveloper();
+                } catch (error) {
+                    alert(error);
+                }
             },
-            menuAdmin(){
-                redireccionarAPaginaMenuAdmin();
+            async menuAdmin(){
+                try {
+                    const correoActual = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/correo");
+                    const usuarioPerfilNuevo = {
+                        "correo": correoActual.data,
+                        "perfilactual": "Administrador"
+                    }
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/cambiarPerfil/", usuarioPerfilNuevo);
+                    console.log(registro);
+                    redireccionarAPaginaMenuAdmin();
+                } catch (error) {
+                    alert(error);
+                }
             },
-            menuClient(){
-                RedireccionarAPaginaMenuClient();
+            async menuClient(){
+                try {
+                    const correoActual = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/correo");
+                    const usuarioPerfilNuevo = {
+                        "correo": correoActual.data,
+                        "perfilactual": "Cliente"
+                    }
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/cambiarPerfil/", usuarioPerfilNuevo);
+                    console.log(registro);
+                    RedireccionarAPaginaMenuClient();
+                } catch (error) {
+                    alert(error);
+                }
             },
-            menuEmployee(){
-                RedireccionarAPaginaMenuEmployee();
+            async menuEmployee(){
+                try {
+                    const correoActual = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/correo");
+                    const usuarioPerfilNuevo = {
+                        "correo": correoActual.data,
+                        "perfilactual": "Empleado"
+                    }
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/cambiarPerfil/", usuarioPerfilNuevo);
+                    console.log(registro);
+                    RedireccionarAPaginaMenuEmployee();
+                } catch (error) {
+                    alert(error);
+                }
             },
-            //SECCION DE LOGOUT
-            logout(){
-                redireccionarAPaginaPrincipal();
+            async logout(){
+                //SECCION DE LOGOUT
+                try {
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/logout/");
+                    console.log(registro);
+                    redireccionarAPaginaPrincipal();
+                } catch (error) {
+                    alert(error);
+                }
             }
         }
     };

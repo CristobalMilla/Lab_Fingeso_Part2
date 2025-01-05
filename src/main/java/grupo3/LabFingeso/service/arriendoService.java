@@ -55,7 +55,8 @@ public class arriendoService {
             if(arriendoUsuario != null){
                 if(arriendoUsuario.getEstado().equalsIgnoreCase("en uso")
                 || arriendoUsuario.getEstado().equalsIgnoreCase("retirar")
-                || arriendoUsuario.getEstado().equalsIgnoreCase("retraso")){
+                || arriendoUsuario.getEstado().equalsIgnoreCase("retraso")
+                || arriendoUsuario.getEstado().equalsIgnoreCase("terminado")){
                     return true;
                 }
             }
@@ -183,9 +184,18 @@ public class arriendoService {
                 return 0;
             }
             else{
-                arriendoExistente.setEstado(nuevoEstado);
-                arriendoRepo.save(arriendoExistente);
-                return 1;
+                if(nuevoEstado.equalsIgnoreCase("en uso")
+                        || nuevoEstado.equalsIgnoreCase("retirar")
+                        || nuevoEstado.equalsIgnoreCase("retraso")
+                        || nuevoEstado.equalsIgnoreCase("terminado")) {
+                    arriendoExistente.setEstado(nuevoEstado);
+                    arriendoRepo.save(arriendoExistente);
+                    return 1;
+                }
+                else{
+                    return 0;
+                }
+
             }
         }
         catch (Exception e){

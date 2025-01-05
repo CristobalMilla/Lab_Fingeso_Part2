@@ -192,8 +192,14 @@ public class usuarioService {
 
 
 
-    public void deleteUsuarioById(long idUsuario) {
-        usuarioRepo.deleteById(idUsuario);
+    public boolean deleteUsuarioById(long idUsuario) {
+         try{
+             usuarioRepo.deleteByIdIfExist(idUsuario);
+             return true;
+         }
+         catch (Exception e){
+             return false;
+         }
     }
 
 

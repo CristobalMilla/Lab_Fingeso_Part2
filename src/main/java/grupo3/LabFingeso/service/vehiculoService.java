@@ -109,6 +109,7 @@ public class vehiculoService {
     public boolean eliminateVehiculoById(long idVehiculo){
         if(vehiculoRepo.findByIdIfExist(idVehiculo) != null){
             try {
+                System.out.println(idVehiculo);
                 vehiculoRepo.deleteById(idVehiculo);
                 return true;
             }

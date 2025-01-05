@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a19f910e-c251-49ce-ae1b-9cef23f0d791" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/FrontEnd/AutoAltiro/node_modules/.vue-global-types/vue_3.5_false.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/AutoAltiro/node_modules/.vue-global-types/vue_3.5_false.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/controller/usuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/controller/usuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/controller/vehiculoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/controller/vehiculoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/repository/arriendoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/repository/arriendoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/repository/sucursalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/repository/sucursalRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/repository/usuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/repository/usuarioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/repository/vehiculoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/repository/vehiculoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/service/arriendoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/service/arriendoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/service/sucursalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/service/sucursalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/service/usuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/service/usuarioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/service/vehiculoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/grupo3/LabFingeso/service/vehiculoService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2qo2iqBRzZBev6XHmFr5i2ccm90" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Lab Fingeso.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "BackEnd",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/lucas/Lab fingeso/Lab_Fingeso_Part2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Lab Fingeso" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="grupo3.LabFingeso.LabFingesoApplication" />
+      <module name="LabFingeso" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Lab_Fingeso_Part2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Lab_Fingeso_Part2" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a19f910e-c251-49ce-ae1b-9cef23f0d791" name="Changes" comment="" />
+      <created>1735314736496</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1735314736496</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

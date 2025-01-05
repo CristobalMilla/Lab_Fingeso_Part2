@@ -15,5 +15,4 @@ public interface arriendoRepository extends JpaRepository<arriendoEntity, Long> 
     @Query(value = "SELECT * FROM arriendo WHERE vehiculo = :idvehiculo", nativeQuery = true)
     List<arriendoEntity> findByVehiculo(long idvehiculo);
 
-    boolean deleteById(long idarriendo);
 }

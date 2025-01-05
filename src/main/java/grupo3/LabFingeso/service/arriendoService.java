@@ -139,9 +139,9 @@ public class arriendoService {
             comprobante.setRecibo("RCB-" + arriendoEnProceso.getVehiculo().getIdvehiculo() + usuarioService.getUsuarioActual().getNombreusuario());
             comprobante.setMetodopago("débito");
             comprobante.setMonto(costoTotal);
-            comprService.save(comprobante);
             arriendoEnProceso.setEstado("retirar");
             arriendoEnProceso.setCostototal(costoTotal);
+            comprService.save(comprobante);
             arriendoEnProceso.setComprobante(comprobante);
             arriendoRepo.save(arriendoEnProceso);
             arriendoEnProceso = null;

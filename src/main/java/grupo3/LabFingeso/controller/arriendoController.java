@@ -50,6 +50,11 @@ public class arriendoController {
         return serviceArriendo.updateArriendo(arriendoModificado);
     }
 
+    @PutMapping("/cambiarEstado/{idArriendo}")
+    public int updateEstadoArriendo(@PathVariable long idArriendo, @RequestParam String nuevoEstado){
+        return serviceArriendo.updateEstadoArriendo(idArriendo, nuevoEstado);
+    }
+
     @DeleteMapping("/eliminarArriendo")
     public boolean eliminateArriendoById(@RequestParam long idArriendo){
         return serviceArriendo.eliminateArriendoById(idArriendo);

@@ -176,6 +176,23 @@ public class arriendoService {
         return arriendoRepo.save(arriendoModificado);
     }
 
+    public int updateEstadoArriendo(long idArriendo, String nuevoEstado){
+        try{
+            arriendoEntity arriendoExistente = arriendoRepo.findById(idArriendo).orElse(null);
+            if(arriendoExistente == null){
+                return 0;
+            }
+            else{
+                arriendoExistente.setEstado(nuevoEstado);
+                arriendoRepo.save(arriendoExistente);
+                return 1;
+            }
+        }
+        catch (Exception e){
+            return 0;
+        }
+    }
+
     public boolean eliminateArriendoById(long idArriendo){
         if(arriendoRepo.findById(idArriendo).orElse(null) != null){
             try {

@@ -23,10 +23,10 @@ public class vehiculoService {
     public vehiculoEntity cambiarDisponibilidad(long idVehiculo, String estado){
         vehiculoEntity vehiculo = vehiculoRepo.findByIdIfExist(idVehiculo);
         if(vehiculo != null){
-            vehiculo.setEstado(estado);
             if(estado.equalsIgnoreCase("disponible")
             || estado.equalsIgnoreCase("ocupado")
             || estado.equalsIgnoreCase("mantenimiento")) {
+                vehiculo.setEstado(estado);
                 return vehiculoRepo.save(vehiculo);
             }
         }

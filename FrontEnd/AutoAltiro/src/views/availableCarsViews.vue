@@ -10,7 +10,7 @@ const mensajeError = ref(''); // Mensaje de error
 // Cargar las sucursales al montar el componente
 onMounted(async () => {
   try {
-    const respuesta = await axios.get(import.meta.env.VITE_BASE_URL + 'api/sucursal/listar');
+    const respuesta = await axios.get(import.meta.env.VITE_BASE_URL + 'api/sucursal/obtenerTodas');
     sucursales.value = respuesta.data;
   } catch (error) {
     mensajeError.value = 'Error al cargar las sucursales.';
@@ -20,14 +20,15 @@ onMounted(async () => {
 
 // Obtener los vehículos disponibles para la sucursal seleccionada
 const obtenerVehiculosDisponibles = async () => {
-  if (!sucursalSeleccionada.value) {
+  if (!sucursalSeleccionada) {
     mensajeError.value = 'Por favor seleccione una sucursal.';
     return;
   }
 
   try {
+  console.log(sucursalSeleccionada);
     const respuesta = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}api/vehiculo/disponibles?sucursalId=${sucursalSeleccionada.value}`
+      import.meta.env.VITE_BASE_URL + 'api/vehiculo/disponibles/' + sucursalSeleccionada.value
     );
     vehiculosDisponibles.value = respuesta.data;
     mensajeError.value = '';
@@ -46,7 +47,7 @@ const obtenerVehiculosDisponibles = async () => {
       <label for="sucursal">Seleccione una sucursal:</label>
       <select id="sucursal" v-model="sucursalSeleccionada">
         <option disabled value="">-- Seleccione una sucursal --</option>
-        <option v-for="sucursal in sucursales" :key="sucursal.id" :value="sucursal.id">
+        <option v-for="sucursal in sucursales" :key="sucursal.id" :value="sucursal.idsucursal">
           {{ sucursal.nombre }}
         </option>
       </select>

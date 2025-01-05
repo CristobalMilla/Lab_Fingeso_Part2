@@ -21,17 +21,17 @@
             console.log("Recuperacion de datos correcta");
             //Seccion para cambiar variables segun los tipos de usuario encontrados
             if(perfiles.value.includes('Desarrollador')){
-                developer = true;
+                developer.value = true;
             };
             if(perfiles.value.includes("Administrador")){
-                admin = true;
+                admin.value = true;
             };
             if(perfiles.value.includes('Cliente')){
                 client.value = true;
                 console.log(client);
             };
             if(perfiles.value.includes("empleado")){
-                employee = true;
+                employee.value = true;
             };
         } catch (error) {
             alert(error);

@@ -229,7 +229,7 @@ onMounted(async () => {
 <script>
     import axios from 'axios';
 
-    function redireccionarAPaginaAdministrador(){
+  function redireccionarAPaginaAdministrador(){
     window.location.href = '/menuAdmin';
   }
   //Logout

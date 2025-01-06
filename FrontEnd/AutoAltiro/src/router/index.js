@@ -123,8 +123,8 @@ const router = createRouter({
             component: () => import('../views/editDeliveryViews.vue'),
         },
         {
-            path:'/editAvailabilty',
-            name: 'editAvailabilty',
+            path:'/editAvailability',
+            name: 'editAvailability',
             component: () => import('../views/editAvailabilityViews.vue'),
         },
         

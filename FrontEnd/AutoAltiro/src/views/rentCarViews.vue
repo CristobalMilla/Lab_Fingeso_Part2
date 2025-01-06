@@ -60,14 +60,24 @@ const obtenerVehiculosDisponibles = async () => {
       {{ mensajeError }}
     </div>
 
-    <div v-if="vehiculosDisponibles.length > 0" class="lista-vehiculos, grid">
+    <div v-if="vehiculosDisponibles.length > 0" class="lista-vehiculos">
       <h2>Vehículos disponibles:</h2>
-      <ul>
-        <li v-for="vehiculo in vehiculosDisponibles" :key="vehiculo.id">
-          {{ vehiculo.marca }} {{ vehiculo.modelo }} - {{ vehiculo.matricula }}, Estado:{{ vehiculo.estado }}
+      <div class="grid">
+        <div v-for="vehiculo in vehiculosDisponibles" :key="vehiculo.id">
+          <ul>
+            <li>{{ vehiculo.marca }} - {{ vehiculo.modelo }}</li>
+            <li> Tipo: {{vehiculo.tipo}}</li>
+            <li> Matrícula : {{ vehiculo.matricula }}</li>
+            <li> Kilometraje: {{ vehiculo.kilometraje }}</li>
+            <li> Precio Base: {{ vehiculo.preciobase }}</li>
+            <li> Categoría: {{ vehiculo.categoria }}</li>
+            <li> Transmision: {{ vehiculo.transmision }}</li>
+            <li> Combustible: {{ vehiculo.combustible }}</li>
+            <li> Estado:{{ vehiculo.estado }}</li>
+          </ul>
           <button @click="escoger(vehiculo)">Arrendar</button>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
 
     <div v-else-if="!mensajeError && sucursalSeleccionada">
@@ -197,7 +207,7 @@ export default{
 
 .grid {
   display: grid;
-  grid-gap: 12px;
-  grid-template-columns: repeat(4, 400px);
+  grid-gap: 30px;
+  //grid-template-columns: repeat(2);
 }
 </style>

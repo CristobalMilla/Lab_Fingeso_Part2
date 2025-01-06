@@ -232,6 +232,10 @@ onMounted(async () => {
     function redireccionarAPaginaAdministrador(){
     window.location.href = '/menuAdmin';
   }
+  //Logout
+  function redireccionarAPaginaPrincipal(){
+        window.location.href = '/inicio';
+  }
   export default {
     name: 'addCar',
     data(){
@@ -281,6 +285,16 @@ onMounted(async () => {
           }
         } else {
           alert("Faltan datos para ingresar")
+        }
+      },
+      async logout(){
+        //SECCION DE LOGOUT
+        try {
+          const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/logout/");
+          console.log(registro);
+          redireccionarAPaginaPrincipal();
+        } catch (error) {
+          alert(error);
         }
       }
     },

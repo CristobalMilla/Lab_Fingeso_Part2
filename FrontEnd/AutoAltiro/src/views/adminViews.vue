@@ -95,7 +95,7 @@
     function redireccionarAPaginaSeleccionTipoUsuario(){
         window.location.href = '/tipoUsuario';
     }
-    //Lougout
+    //Logout
     function redireccionarAPaginaPrincipal(){
         window.location.href = '/inicio';
     }

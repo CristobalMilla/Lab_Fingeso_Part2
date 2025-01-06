@@ -108,6 +108,10 @@
     function redireccionarAPaginaAdministrador(){
         window.location.href = '/menuAdmin';
     }
+    //Lougout
+    function redireccionarAPaginaPrincipal(){
+        window.location.href = '/inicio';
+    }
     export default {
         name: 'ModifyCar',
         data(){
@@ -165,6 +169,16 @@
                     }           
                 } else {
                     alert("Debe llenar al menos uno de los campos")
+                }
+            },
+            async logout(){
+               //SECCION DE LOGOUT
+                try {
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/logout/");
+                    console.log(registro);
+                    redireccionarAPaginaPrincipal();
+                } catch (error) {
+                    alert(error);
                 }
             }
         }

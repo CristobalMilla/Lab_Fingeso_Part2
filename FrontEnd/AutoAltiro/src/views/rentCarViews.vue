@@ -64,7 +64,7 @@ const obtenerVehiculosDisponibles = async () => {
       <h2>Vehículos disponibles:</h2>
       <ul>
         <li v-for="vehiculo in vehiculosDisponibles" :key="vehiculo.id">
-          {{ vehiculo.marca }} {{ vehiculo.modelo }} - {{ vehiculo.matricula }}
+          {{ vehiculo.marca }} {{ vehiculo.modelo }} - {{ vehiculo.matricula }}, Estado:{{ vehiculo.estado }}
           <button @click="escoger(vehiculo)">Arrendar</button>
         </li>
       </ul>

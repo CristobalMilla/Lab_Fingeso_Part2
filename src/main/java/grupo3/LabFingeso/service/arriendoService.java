@@ -55,8 +55,7 @@ public class arriendoService {
             if(arriendoUsuario != null){
                 if(arriendoUsuario.getEstado().equalsIgnoreCase("en uso")
                 || arriendoUsuario.getEstado().equalsIgnoreCase("retirar")
-                || arriendoUsuario.getEstado().equalsIgnoreCase("retraso")
-                || arriendoUsuario.getEstado().equalsIgnoreCase("terminado")){
+                || arriendoUsuario.getEstado().equalsIgnoreCase("retraso")){
                     return true;
                 }
             }

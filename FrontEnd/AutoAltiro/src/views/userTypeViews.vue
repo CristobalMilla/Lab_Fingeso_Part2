@@ -59,7 +59,7 @@
                 </router-link>
             </div>
             <div class="inputContainers" v-if="client">
-                <router-link to ='/cliente'>
+                <router-link to ='/menuClient'>
                     <div class="alsoButton" @click="menuClient">Ingresar como cliente</div>
                 </router-link>
             </div>
@@ -141,7 +141,11 @@
                         "perfilactual": "Cliente"
                     }
                     const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/cambiarPerfil/", usuarioPerfilNuevo);
+                    const registro2 = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/obtenerUsuario/" + usuarioPerfilNuevo.correo + '/');
                     console.log(registro);
+                    console.log(registro2);
+                    localStorage.setItem("usuarioActual",JSON.stringify(usuarioPerfilNuevo));
+                    localStorage.setItem("usuario",JSON.stringify(registro2.data));
                     RedireccionarAPaginaMenuClient();
                 } catch (error) {
                     alert(error);

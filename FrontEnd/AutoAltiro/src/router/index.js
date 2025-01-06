@@ -57,7 +57,7 @@ const router = createRouter({
         {
             path:'/rentCar',
             name: 'rentCar',
-            component: () => import('../views/userSelfEditViews.vue'),
+            component: () => import('../views/rentCarViews.vue'),
         },
         {
             path:'/purchaseHistory',

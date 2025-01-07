@@ -19,7 +19,7 @@
                     <input type="email" v-model="usernameRegister" required pattern=".+@.+\..+" placeholder="Ingrese correo">
                     <input type="password" v-model="passwordRegister" required placeholder="Ingrese contraseña">
                     <input type="password" v-model="passwordRegisterConfirmation" required placeholder="Ingrese contraseña nuevamente">
-                    <input type="tel" v-model="rutRegister" required pattern="[0-9]{8}-[0-9k]{1}" placeholder="RUT: 12345678-9">
+                    <input type="number" v-model="rutRegister" required " placeholder="RUT: 123456789">
                     <input type="name" v-model="nameRegister" required placeholder="Ingrese su nombre">
                     <input type="number" v-model="ageRegister" required min=18 placeholder="Ingrese su edad">
                     <input type="documentName" v-model="documentNameRegister" required maxlength=100 placeholder="Ingrese su numero de documento">

@@ -49,7 +49,7 @@ onBeforeMount(async () => {
       <button @click="handleChangeDisponibilidad">Cambiar disponibilidad vehículo</button>
     </router-link>
     <router-link to ="/tipoUsuario">
-        <button @click="volver">Regresar</button>
+        <button @click="return">Regresar</button>
     </router-link>
   </div>
   </template>
@@ -66,7 +66,7 @@ onBeforeMount(async () => {
     }
     export default {
         methods:{
-            async returnClient(){
+            async return(){
                 //SECCION DE RETURN A TIPO USUARIO
                 try {
                     const correoActual = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/correo");

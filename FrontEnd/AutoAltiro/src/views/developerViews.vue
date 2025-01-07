@@ -5,7 +5,7 @@
 <template>
     <div>EN CONSTRUCCION</div>
     <div class="alsoButtons">
-        <router-link to="/menuAdmin">
+        <router-link to="/tipoUsuario">
           <div class="alsoButton" @click="regresar">Regresar al menu anterior</div>
         </router-link>
     </div>
@@ -28,7 +28,7 @@ import axios from 'axios';
     }
     export default {
         methods:{
-            async returnDeveloper(){
+            async regresar(){
                 //SECCION DE RETURN A TIPO USUARIO
                 try {
                     const correoActual = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/correo");

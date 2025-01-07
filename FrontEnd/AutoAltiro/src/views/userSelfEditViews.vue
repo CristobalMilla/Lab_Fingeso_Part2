@@ -1,10 +1,65 @@
 <script setup>
+    import { ref, onMounted } from 'vue';
+    import axios from 'axios';
+
+    const userType = ref(''); //Perfil actual 
+    const isClient = ref(null); //Si es perfil cliente
+    const isAdmin = ref(null); //Si es perfil administrador
+    const isDeveloper = ref(null); //Si es perfil administrador
+    const isEmployee = ref(null); //Si es perfil administrador
+    onMounted(async () => {
+        try {
+            const respuesta = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/perfilActual");
+            userType.value = respuesta.data;
+            if(userType.value == "Cliente"){
+                isClient.value = true;
+            }
+            else if (userType.value == "Administrador"){
+                isAdmin.value = true;
+            }
+            else if (userType.value == "Desarrollador"){
+                isDeveloper.value = true;
+            }
+            else if (userType.value == "Empleado"){
+                isEmployee.value = true;
+            }
+            else{
+                alert("Tipo de usuario actual incorrecto");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    })
 
 </script>
 
 <template>
-
-
+    <div>EN CONSTRUCCION</div>
+    <div class="alsoButtons" v-if="isAdmin">
+        <router-link to="/menuAdmin">
+          <div class="alsoButton" @click="regresar">Regresar al menu anterior</div>
+        </router-link>
+    </div>
+    <div class="alsoButtons" v-if="isClient">
+        <router-link to="/menuClient">
+          <div class="alsoButton" @click="regresar">Regresar al menu anterior</div>
+        </router-link>
+    </div>
+    <div class="alsoButtons" v-if="isDeveloper">
+        <router-link to="/menuDeveloper">
+          <div class="alsoButton" @click="regresar">Regresar al menu anterior</div>
+        </router-link>
+    </div>
+    <div class="alsoButtons" v-if="isEmployee">
+        <router-link to="/menuEmployee">
+          <div class="alsoButton" @click="regresar">Regresar al menu anterior</div>
+        </router-link>
+    </div>
+     <div class="alsoButtons">
+        <router-link to="/inicio">
+            <div class="alsoButton" @click="logout">Logout</div>
+        </router-link>
+    </div>
 </template>
 
 <script>
@@ -28,9 +83,10 @@
     }
     export default {
         methods:{
-            async return(){
+            async regresar(){
                 //SECCION DE RETURN A MENU ANTERIOR SEGUN USUARIO ACTUAL
                 try {
+                    //Parte innecesaria, pero no es necesario eliminar todavia
                     const perfilActual = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/perfilActual");
                     console.log(perfilActual);
                     if (perfilActual.data == "Administrador"){

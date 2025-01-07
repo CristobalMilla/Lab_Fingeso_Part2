@@ -183,9 +183,18 @@ public class arriendoService {
                 return 0;
             }
             else{
-                arriendoExistente.setEstado(nuevoEstado);
-                arriendoRepo.save(arriendoExistente);
-                return 1;
+                if(nuevoEstado.equalsIgnoreCase("en uso")
+                        || nuevoEstado.equalsIgnoreCase("retirar")
+                        || nuevoEstado.equalsIgnoreCase("retraso")
+                        || nuevoEstado.equalsIgnoreCase("terminado")) {
+                    arriendoExistente.setEstado(nuevoEstado);
+                    arriendoRepo.save(arriendoExistente);
+                    return 1;
+                }
+                else{
+                    return 0;
+                }
+
             }
         }
         catch (Exception e){

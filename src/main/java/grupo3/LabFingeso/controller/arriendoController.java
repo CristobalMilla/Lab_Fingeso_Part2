@@ -30,8 +30,8 @@ public class arriendoController {
         return serviceArriendo.arriendoPaso3(idSucursalFinal, fechaCompra);
     }
 
-    @GetMapping("/obtenerPorCliente")
-    public List<arriendoEntity> getArriendoByIdUsuario(@RequestParam long idCliente){
+    @GetMapping("/obtenerPorCliente/{idCliente}")
+    public List<arriendoEntity> getArriendoByIdUsuario(@PathVariable long idCliente){
         return serviceArriendo.getArriendoByidCliente(idCliente);
     }
 

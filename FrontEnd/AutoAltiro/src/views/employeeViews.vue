@@ -91,6 +91,12 @@ function redireccionarAPaginaSeleccionTipoUsuario(){
 function redireccionarAPaginaPrincipal(){
   window.location.href = '/inicio';
 }
+function redireccionarAModificarEntrega(){
+  window.location.href = '/editDelivery'
+}
+function redireccionarAModificarDisponibilidad(){
+  window.location.href = '/editAvailability'
+}
 export default {
   methods:{
     async returnClient(){

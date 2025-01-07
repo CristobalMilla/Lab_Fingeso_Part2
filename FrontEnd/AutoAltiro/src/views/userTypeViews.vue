@@ -43,38 +43,58 @@
 </script>
 
 <template>
-   <main>
-    <div class="general">
-        <div class="content">
-            <img class="image" src="./media/LogoUsachNegro.png">
-            <div class="header">Elija el tipo de usuario que desea utilizar</div>
-            <div class="inputContainers" v-if="developer">
-                <router-link to ='/desarrollador'>
-                    <div class="alsoButton" @click="menuDeveloper">Ingresar como desarrollador</div>
-                </router-link>
-            </div>
-            <div class="inputContainers" v-if="admin">
-                <router-link to ='/administrador'>
-                    <div class="alsoButton" @click="menuAdmin">Ingresar como administrador</div>
-                </router-link>
-            </div>
-            <div class="inputContainers" v-if="client">
-                <router-link to ='/menuClient'>
-                    <div class="alsoButton" @click="menuClient">Ingresar como cliente</div>
-                </router-link>
-            </div>
-            <div class="inputContainers" v-if="employee">
-                <router-link to ='/empleado'>
-                    <div class="alsoButton" @click="menuEmployee">Ingresar como empleado</div>
-                </router-link>
-            </div>
-            <div class="headerDescription" v-if="!developer && !admin && !client && !employee">Su usuario no tiene los permisos correctos</div>
-            <div class="alsoButtons">
-                <div class="alsoButton" @click="logout">Logout</div>
-            </div>
-        </div>
+  <div class="page-container">
+    <div class="content-card">
+      <img class="logo" src="./media/LogoUsachNegro.png" alt="Logo">
+      <h1 class="title">Seleccione su Perfil de Usuario</h1>
+
+      <div class="roles-grid" v-if="developer || admin || client || employee">
+        <router-link
+            v-if="developer"
+            to="/menuDeveloper"
+            class="role-card"
+        >
+          <span class="icon">👨‍💻</span>
+          <span class="role-name">Desarrollador</span>
+        </router-link>
+
+        <router-link
+            v-if="admin"
+            to="/menuAdmin"
+            class="role-card"
+        >
+          <span class="icon">👨‍💼</span>
+          <span class="role-name">Administrador</span>
+        </router-link>
+
+        <router-link
+            v-if="client"
+            to="/menuClient"
+            class="role-card"
+        >
+          <span class="icon">🧑‍🦲</span>
+          <span class="role-name">Cliente</span>
+        </router-link>
+
+        <router-link
+            v-if="employee"
+            to="/menuEmployee"
+            class="role-card"
+        >
+          <span class="icon">👨‍🔧</span>
+          <span class="role-name">Empleado</span>
+        </router-link>
+      </div>
+
+      <div v-else class="no-roles">
+        <p>Su usuario no tiene los permisos correctos</p>
+      </div>
+
+      <button @click="logout" class="logout-btn">
+        Cerrar Sesión
+      </button>
     </div>
-   </main>
+  </div>
 </template>
 
 
@@ -182,6 +202,108 @@
 </script>
 
 
-<style>
+<style scoped>
+.page-container {
+  min-height: 100vh;
+  padding: 2rem;
+  background: #5c6bb5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.content-card {
+  width: 100%;
+  max-width: 800px;
+  background: #a9b7fc;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  color: #2c3e50;
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.role-card {
+  background: linear-gradient(135deg, #2447bd, #29c9ce);
+  padding: 1.5rem;
+  border-radius: 12px;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.2s;
+}
+
+.role-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+  font-size: 2rem;
+}
+
+.role-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.no-roles {
+  background: #fff5f5;
+  color: #e53e3e;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.logout-btn {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #e53e3e, #c53030);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1rem;
+  }
+
+  .content-card {
+    border-radius: 0;
+    padding: 1rem;
+  }
+
+  .roles-grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>

@@ -26,8 +26,8 @@ public class arriendoController {
     }
 
     @PostMapping("/paso3")
-    public int arriendoPaso3(@RequestParam int idSucursalFinal, @RequestBody Date fechaCompra){
-        return serviceArriendo.arriendoPaso3(idSucursalFinal, fechaCompra);
+    public int arriendoPaso3(@RequestParam int idSucursalFinal, @RequestBody arriendoEntity fechaCompra){
+        return serviceArriendo.arriendoPaso3(idSucursalFinal, fechaCompra.getFechainicio());
     }
 
     @GetMapping("/obtenerPorCliente/{idCliente}")

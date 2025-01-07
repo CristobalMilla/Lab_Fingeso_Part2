@@ -39,14 +39,16 @@ onMounted(async () => {
     </div>
 
   </div>
-  <router-link to ="/menuClient">
-        <button @click="volver">Regresar</button>
+  <div class="alsoButtons">
+    <router-link to ="/menuClient">
+      <button @click="volver">Regresar</button>
     </router-link>
-    <div class="alsoButtons">
-      <router-link to="/inicio">
-        <div class="alsoButton" @click="logout">Logout</div>
-      </router-link>
-    </div>
+  </div>
+  <div class="alsoButtons">
+    <router-link to="/inicio">
+      <div class="alsoButton" @click="logout">Logout</div>
+    </router-link>
+  </div>
 </template>
 
 <script>

@@ -150,11 +150,27 @@ const obtenerVehiculosDisponibles = async () => {
       </div>
     </div>
   </div>
+  <div class="alsoButtons">
+    <router-link to ="/menuClient">
+      <button @click="volver">Regresar</button>
+    </router-link>
+  </div>
+  <div class="alsoButtons">
+    <router-link to="/inicio">
+      <div class="alsoButton" @click="logout">Logout</div>
+    </router-link>
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
-
+import axios from 'axios';
+  function redireccionarAPaginaCliente(){
+    window.location.href = '/menuClient';
+  }
+  //Logout
+  function redireccionarAPaginaPrincipal(){
+        window.location.href = '/inicio';
+  }
 export default{
     data (){
         return{
@@ -170,98 +186,97 @@ export default{
     },
     methods :{
         async escoger(a){
-	    this.vehiculoEscogido = a;
-	    console.log(this.vehiculoEscogido);
-	},
-      async resetProcess (){
-        this.vehiculoEscogido= null;
-        this.paso1Resultado = null;
-        this.paso2Resultado = null;
-        this.paso3Resultado = null;
-        this.compraFinalizada = false;
-        this.fechaInicio = '';
-        this.fechaFin = '';
-        this.sucursalFinal = '';
-      },
+	        this.vehiculoEscogido = a;
+	        console.log(this.vehiculoEscogido);
+	      },
+        async resetProcess (){
+          this.vehiculoEscogido= null;
+          this.paso1Resultado = null;
+          this.paso2Resultado = null;
+          this.paso3Resultado = null;
+          this.compraFinalizada = false;
+          this.fechaInicio = '';
+          this.fechaFin = '';
+          this.sucursalFinal = '';
+        },
         async paso1(){
-            console.log(this.vehiculoEscogido);
-            const arriendo = {
-                "fechainicio" : this.fechaInicio,
-                "fechafin" : this.fechaFin
+          console.log(this.vehiculoEscogido);
+          const arriendo = {
+            "fechainicio" : this.fechaInicio,
+            "fechafin" : this.fechaFin
+          }
+          try {
+            const resultado = await axios.post(import.meta.env.VITE_BASE_URL + "api/arriendo/paso1/" + this.vehiculoEscogido.idvehiculo, arriendo);
+            this.paso1Resultado = resultado.data;
+            console.log("paso1Resultado :");
+            console.log(this.paso1Resultado);
+            if(this.paso1Resultado == 0){
+              console.log("Usuario no está logueado");
+              this.vehiculoEscogido = null;
+              alert("Usuario no está logueado");
             }
-            try {
-                const resultado = await axios.post(import.meta.env.VITE_BASE_URL + "api/arriendo/paso1/" + this.vehiculoEscogido.idvehiculo, arriendo);
-                this.paso1Resultado = resultado.data;
-                console.log("paso1Resultado :");
-                console.log(this.paso1Resultado);
-                if(this.paso1Resultado == 0){
-                    console.log("Usuario no está logueado");
-                    this.vehiculoEscogido = null;
-                    alert("Usuario no está logueado");
-                }
-                if(this.paso1Resultado == 2){
-                    console.log("No existe el vehículo en la BD");
-                  this.paso1Resultado = null;
-                    this.vehiculoEscogido = null;
-                    alert("No existe el vehículo en la BD");
-
-                }
-                if(this.paso1Resultado == 3){
-                    console.log("El vehículo no está disponible");
-                  this.paso1Resultado = null;
-                  this.vehiculoEscogido = null;
-                    alert("El vehículo no está disponible");
-                }
-                if(this.paso1Resultado == 4){
-                    console.log("El usuario tiene arriendos activos");
-                  this.paso1Resultado = null;
-                  this.vehiculoEscogido = null;
-                    alert("El usuario tiene arriendos activos");
-                }
-                if(this.paso1Resultado == 5){
-                    console.log("El vehículo no está reservado entre las fechas");
-                  this.paso1Resultado = null;
-                  this.vehiculoEscogido = null;
-                    alert("El vehículo no está reservado entre las fechas");
-                }
-                if(this.paso1Resultado == 6){
-                    console.log("El arriendo sobrepasa los 30 días");
-                    this.paso1Resultado = null;
-                    alert("El arriendo sobrepasa los 30 días");
-                }
+            if(this.paso1Resultado == 2){
+              console.log("No existe el vehículo en la BD");
+              this.paso1Resultado = null;
+              this.vehiculoEscogido = null;
+              alert("No existe el vehículo en la BD");
             }
-            catch (error){
-                alert(error);
+            if(this.paso1Resultado == 3){
+              console.log("El vehículo no está disponible");
+              this.paso1Resultado = null;
+              this.vehiculoEscogido = null;
+              alert("El vehículo no está disponible");
             }
+            if(this.paso1Resultado == 4){
+              console.log("El usuario tiene arriendos activos");
+              this.paso1Resultado = null;
+              this.vehiculoEscogido = null;
+              alert("El usuario tiene arriendos activos");
+            }
+            if(this.paso1Resultado == 5){
+              console.log("El vehículo no está reservado entre las fechas");
+              this.paso1Resultado = null;
+              this.vehiculoEscogido = null;
+              alert("El vehículo no está reservado entre las fechas");
+            }
+            if(this.paso1Resultado == 6){
+              console.log("El arriendo sobrepasa los 30 días");
+              this.paso1Resultado = null;
+              alert("El arriendo sobrepasa los 30 días");
+            }
+          }
+          catch (error){
+            alert(error);
+          }
         },
         async paso2(){
-            try {
-                const resultado = await axios.post(import.meta.env.VITE_BASE_URL + "api/arriendo/paso2");
-                this.paso2Resultado = resultado.data;
-                console.log("paso2Resultado :");
-                console.log(this.paso2Resultado);
-            }
-            catch (error){
-                alert(error);
-            }
+          try {
+            const resultado = await axios.post(import.meta.env.VITE_BASE_URL + "api/arriendo/paso2");
+            this.paso2Resultado = resultado.data;
+            console.log("paso2Resultado :");
+            console.log(this.paso2Resultado);
+          }
+          catch (error){
+            alert(error);
+          }
         },
         async paso3(){
-            const fechaCompra = {
-              "fechainicio": this.fechaInicio
+          const fechaCompra = {
+            "fechainicio": this.fechaInicio
+          }
+          console.log(this.fechaInicio)
+          try {
+            const resultado = await axios.post(import.meta.env.VITE_BASE_URL + "api/arriendo/paso3?idSucursalFinal="+ this.sucursalFinal, fechaCompra);
+            this.paso3Resultado = resultado.data;
+            console.log("paso3Resultado :");
+            console.log(this.paso3Resultado);
+            if (this.paso3Resultado == 1){
+              this.compraFinalizada = true;
             }
-            console.log(this.fechaInicio)
-            try {
-                const resultado = await axios.post(import.meta.env.VITE_BASE_URL + "api/arriendo/paso3?idSucursalFinal="+ this.sucursalFinal, fechaCompra);
-                this.paso3Resultado = resultado.data;
-                console.log("paso3Resultado :");
-                console.log(this.paso3Resultado);
-                if (this.paso3Resultado == 1){
-                    this.compraFinalizada = true;
-                }
-            }
-            catch (error){
-                alert(error);
-            }
+          }
+          catch (error){
+            alert(error);
+          }
         },
       async logout(){
         //SECCION DE LOGOUT
@@ -272,6 +287,9 @@ export default{
         } catch (error) {
           alert(error);
         }
+      },
+      volver(){
+                redireccionarAPaginaCliente();
       }
     }
 }

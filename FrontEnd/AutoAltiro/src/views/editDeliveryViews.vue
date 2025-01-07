@@ -59,9 +59,11 @@ const updateEstado = async () => {
             <button @click="updateEstado">Actualizar</button>
         </span>
     </div>
+    <div class="alsoButtons">
     <router-link to ="/menuEmployee">
         <button @click="volver">Regresar</button>
     </router-link>
+    </div>
     <div class="alsoButtons">
       <router-link to="/inicio">
         <div class="alsoButton" @click="logout">Logout</div>

@@ -69,6 +69,16 @@ onBeforeMount(async () => {
       </div>
     </div>
   </div>
+  <div class="alsoButtons">
+    <router-link to ="/tipoUsuario">
+        <button @click="returnClient">Regresar</button>
+    </router-link>
+    </div>
+    <div class="alsoButtons">
+      <router-link to="/inicio">
+        <div class="alsoButton" @click="logout">Logout</div>
+      </router-link>
+    </div>
 </template>
 
 <script>

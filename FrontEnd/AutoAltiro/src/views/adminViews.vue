@@ -5,46 +5,50 @@
 
 
 <template>
-    <main>
-        <div class="general"> 
-            <div class="content">
-                <img class="image" src="./media/LogoUsachNegro.png">
-                <div class="header">Seleccione la opcion que desee</div>
-                <div class="alsoButtons">
-                    <div class="inputContainers" v-if="changeFlota">
-                        <router-link to="/addCar">
-                            <div class="alsoButton" @click="addCar">Agregar vehiculo a la flota</div>
-                        </router-link>
-                        <router-link to="/editCar">
-                            <div class="alsoButton" @click="editCar">Modificar vehiculo en la flota</div>
-                        </router-link>
-                        <router-link to="/eraseCar">
-                            <div class="alsoButton" @click="eraseCar">Eliminar un vehiculo en la flota</div>
-                        </router-link>
-                        <div class="alsoButton" @click="handleChangeFlota">Regresar</div>
-                    </div>
-                    <div class="inputContainers" v-else>
-                        <div class="alsoButton" @click="handleChangeFlota">Agregar, modificar o eliminar vehiculos de la flota</div>
-                    </div>
-                </div>
-                <div class="alsoButtons">
-                    <router-link to="/recepcion">
-                        <div class="alsoButton" @click="recepcion">Recepcionar vehiculos / Cambiar disponibilidad</div>
-                    </router-link>
-                </div>
-                <div class="alsoButtons">
-                   <router-link to="/tipoUsuario">
-                        <div class="alsoButton" @click="returnAdmin">Regresar</div>
-                   </router-link>
-                </div>
-                <div class="alsoButtons">
-                   <router-link to="/inicio">
-                        <div class="alsoButton" @click="logout">Logout</div>
-                   </router-link>
-                </div>
+  <div class="page-container">
+    <div class="content-card">
+      <img class="admin-logo" src="./media/LogoUsachNegro.png" alt="Logo">
+      <h1 class="admin-title">Panel de Administración</h1>
+      <div class="menu-section">
+        <h2 class="section-title">Gestión de Vehículos</h2>
+        <div class="menu-grid">
+          <router-link to="/addCar" class="menu-item" @click="addCar">
+            <div class="menu-content">
+              <span class="icon">🚗</span>
+              <span>Agregar vehículo</span>
             </div>
+          </router-link>
+          <router-link to="/adminEditCar" class="menu-item" @click="editCar">
+            <div class="menu-content">
+              <span class="icon">🔧</span>
+              <span>Modificar vehículo</span>
+            </div>
+          </router-link>
+          <router-link to="/eraseCar" class="menu-item" @click="removeCar">
+            <div class="menu-content">
+              <span class="icon">🗑️</span>
+              <span>Eliminar vehículo</span>
+            </div>
+          </router-link>
+          <router-link to="/recepcion" class="menu-item" @click="recepcion">
+            <div class="menu-content">
+              <span class="icon">🔄</span>
+              <span>Cambiar disponibilidad</span>
+            </div>
+          </router-link>
         </div>
-    </main>
+      </div>
+      <div class="action-buttons">
+        <router-link to="/tipoUsuario" class="btn" @click="returnClient">
+          Cambiar Perfil
+        </router-link>
+        <router-link to="/inicio" class="btn" @click="logout">
+          Cerrar Sesión
+        </router-link>
+      </div>
+
+    </div>
+  </div>
 </template>
 
 <script>
@@ -60,11 +64,15 @@
     }
     //Edit Car
     function redireccionarAPaginaEditCar(){
-        window.location.href = '/adminEditUser';
+        window.location.href = '/adminEditCar';
     }
     //Remove Car
     function redireccionarAPaginaRemoveCar(){
         window.location.href = '/adminRemoveUser';
+    }
+    //Cambiar disponibilidad
+    function redireccionarAModificarDisponibilidad(){
+      window.location.href = '/editAvailability';
     }
     //Add User
     function redireccionarAPaginaAddUser(){
@@ -90,7 +98,6 @@
     function redireccionarAPaginaRemoveBranch(){
         window.location.href = '/adminRemoveBranch';
     }
-    
     //Volver a pagina anterior
     function redireccionarAPaginaSeleccionTipoUsuario(){
         window.location.href = '/tipoUsuario';
@@ -121,6 +128,9 @@
             },
             removeCar(){
                 redireccionarAPaginaRemoveCar();
+            },
+            recepcion(){
+                redireccionarAModificarDisponibilidad();
             },
             addUser(){
                 redireccionarAPaginaAddUser();
@@ -175,6 +185,98 @@
     
 </script>
 
-<style>
+<style scoped>
+.admin-logo {
+  width: 120px;
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
+}
 
+.admin-title {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.menu-section {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  color: #2c3e50;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.menu-item {
+  background: linear-gradient(135deg, #2447bd, #29c9ce);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.menu-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.menu-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.icon {
+  font-size: 1.5rem;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
 </style>

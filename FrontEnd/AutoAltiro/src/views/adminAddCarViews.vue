@@ -13,8 +13,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="add-car-container">
-    <div class="add-car-card">
+  <div class="page-container ">
+    <div class="content-card">
     <h1 class="add-car-title">Agregar un Vehículo</h1>
       <form @submit.prevent="agregarVehiculo" class="add-car-form">
         <div class="form-grid">
@@ -73,7 +73,7 @@ onMounted(async () => {
                   type="text"
                   v-model="vehicleState"
                   required
-                  placeholder="ej. Nuevo"
+                  placeholder="ej. Disponible"
               >
             </div>
 
@@ -216,9 +216,9 @@ onMounted(async () => {
         </div>
 
       <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Agregar</button>
+        <button type="submit" class="btn">Agregar</button>
         <router-link to="/menuAdmin">
-          <div class="btn btn-secondary" @click="regresar">Regresar</div>
+          <div class="btn" @click="regresar">Regresar</div>
         </router-link>
       </div>
     </form>
@@ -304,44 +304,36 @@ onMounted(async () => {
 <style scoped>
 .add-car-container {
   min-height: 100vh;
-  padding: 2rem;
-  background-color: #f5f5f5;
-  display: grid;
-  place-items: center;
+  background: linear-gradient(135deg, #f6f9fc 0%, #f1f5f9 100%);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-car-card {
+  width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 1rem;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-}
-
-.add-car-title {
-  color: #2c3e50;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.add-car-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 2rem);
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
-.form-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.add-car-title {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .section-title {
@@ -352,97 +344,21 @@ onMounted(async () => {
   border-bottom: 2px solid #e0e0e0;
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.input-group label {
-  color: #4a5568;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.input-group input,
-.input-group select {
-  padding: 0.75rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 1rem;
-  transition: border-color 0.2s;
-}
-
-.input-group input:focus,
-.input-group select:focus {
-  outline: none;
-  border-color: #4299e1;
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
-}
-
-.input-group input:required,
-.input-group select:required {
-  border-left: 3px solid #4299e1;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-primary {
-  background-color: #4299e1;
-  color: white;
-  border: none;
-}
-
-.btn-primary:hover {
-  background-color: #3182ce;
-}
-
-.btn-secondary {
-  background-color: #e2e8f0;
-  color: #4a5568;
-  border: none;
-}
-
-.btn-secondary:hover {
-  background-color: #cbd5e0;
-}
-
 @media (max-width: 768px) {
   .add-car-container {
-    padding: 1rem;
+    padding: 0;
+    align-items: flex-start;
   }
 
   .add-car-card {
+    margin: 0;
+    border-radius: 0;
+    min-height: 100vh;
+  }
+
+
+  .form-section {
     padding: 1rem;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .form-actions {
-    flex-direction: column;
-  }
-
-  .btn {
-    width: 100%;
   }
 }
 </style>

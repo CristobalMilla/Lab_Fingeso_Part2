@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 // Datos reactivos
-const userType = ref('anónimo'); // Tipo de usuario
+const userType = ref('Anonimo'); // Tipo de usuario
 const router = useRouter();
 
 // Función para volver a la página de inicio y restablecer el estado del usuario

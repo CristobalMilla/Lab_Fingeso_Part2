@@ -6,6 +6,9 @@ const sucursales = ref([]); // Lista de sucursales
 const sucursalSeleccionada = ref(null); // Sucursal seleccionada
 const vehiculosDisponibles = ref([]); // Lista de vehículos disponibles
 const mensajeError = ref(''); // Mensaje de error
+const userType = ref(''); //Perfil actual 
+const isClient = ref(null); //Si es perfil cliente
+const isAnon = ref(null); //Si es perfil anonimo
 
 // Cargar las sucursales al montar el componente
 onMounted(async () => {
@@ -17,7 +20,23 @@ onMounted(async () => {
     console.error(error);
   }
 });
-
+onMounted(async () => {
+  try {
+    const respuesta = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/perfilActual");
+    userType.value = respuesta.data;
+    if(userType.value == "Cliente"){
+      isClient.value = true;
+    }
+    if (userType.value == "Anonimo"){
+      isAnon.value = true;
+    }
+    else{
+      alert("Tipo de usuario actual incorrecto");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+})
 // Obtener los vehículos disponibles para la sucursal seleccionada
 const obtenerVehiculosDisponibles = async () => {
   if (!sucursalSeleccionada) {
@@ -81,7 +100,44 @@ const obtenerVehiculosDisponibles = async () => {
       <p>No hay vehículos disponibles para esta sucursal.</p>
     </div>
   </div>
+  <div class="alsoButtons" v-if="isClient.value">
+        <router-link to="/menuClient">
+          <div class="alsoButton" @click="regresar">Regresar al menu anterior</div>
+        </router-link>
+  </div>
+  <div class="alsoButtons"> <!-- Esto no pide v-if ya que si es cliente o anonimo, logout deberia hacer lo mismo-->
+        <router-link to="/inicio">
+          <div class="alsoButton" @click="logout">Logout</div>
+        </router-link>
+  </div>
 </template>
+
+<script>
+  function redireccionarAPaginaCliente(){
+    window.location.href = '/menuClient';
+  }
+  //Logout
+  function redireccionarAPaginaPrincipal(){
+        window.location.href = '/inicio';
+  }
+  export default{
+    methods:{
+      regresar(){
+                redireccionarAPaginaCliente();
+      },
+      async logout(){
+               //SECCION DE LOGOUT
+                try {
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/logout/");
+                    console.log(registro);
+                    redireccionarAPaginaPrincipal();
+                } catch (error) {
+                    alert(error);
+                }
+      }
+    }
+  }
+</script>
 
 <style>
 .pagina-sucursales {

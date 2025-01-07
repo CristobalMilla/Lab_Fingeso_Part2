@@ -108,6 +108,7 @@ export default{
         async anonimo(){
             try {
                 const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/loginAnonimo");
+                console.log(registro);
                 redireccionarAPaginaUsuarioAnonimo();
             } catch (error) {
                 alert(error);

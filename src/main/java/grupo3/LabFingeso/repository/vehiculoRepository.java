@@ -15,7 +15,7 @@ public interface vehiculoRepository extends JpaRepository<vehiculoEntity, Long> 
     @Query(value = "SELECT * FROM vehiculo WHERE idvehiculo = :idvehiculo AND existevehiculo = true", nativeQuery = true)
     vehiculoEntity findByIdIfExist(@Param("idvehiculo") long idVehiculo);
 
-    @Query(value = "SELECT * FROM vehiculo WHERE existevehiculo = true", nativeQuery = true)
+    @Query(value = "SELECT * FROM vehiculo WHERE existevehiculo = true GROUP BY idvehiculo ORDER BY idvehiculo ASC", nativeQuery = true)
     List<vehiculoEntity> findAllThatExists();
 
     List<vehiculoEntity> findAllByEstado(String estado);

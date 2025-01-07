@@ -36,18 +36,15 @@ onMounted(async () => {
     console.error(error);
   }
 });
-onMounted(async () => {
+onBeforeMount(async () => {
   try {
     const respuesta = await axios.get(import.meta.env.VITE_BASE_URL + "api/usuario/usuarioActual/perfilActual");
     userType.value = respuesta.data;
     if(userType.value == "Cliente"){
       isClient.value = true;
     }
-    if (userType.value == "Anonimo"){
+    else if (userType.value == "Anonimo"){
       isAnon.value = true;
-    }
-    else{
-      alert("Tipo de usuario actual incorrecto");
     }
   } catch (error) {
     console.log(error);
@@ -172,6 +169,7 @@ const obtenerVehiculosDisponibles = async () => {
     </div>
   </div>
 </template>
+
 <script>
 function redireccionarAPaginaCliente(){
   window.location.href = '/menuClient';

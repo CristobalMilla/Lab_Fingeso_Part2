@@ -110,6 +110,7 @@ const obtenerVehiculosDisponibles = async () => {
           </option>
         </select>
       </div>
+      <p>{{sucursalFinal}}</p>
       <button v-if="sucursalFinal" @click="paso3">Finalizar compra</button>
     </div>
 
@@ -117,12 +118,27 @@ const obtenerVehiculosDisponibles = async () => {
       <p>¡Compra Finalizada!</p>
     </div>
   </div>
-  
+  <div class="alsoButtons">
+        <router-link to="/menuClient">
+          <div class="alsoButton" @click="regresar">Regresar al menu anterior</div>
+        </router-link>
+      </div>
+      <div class="alsoButtons">
+        <router-link to="/inicio">
+          <div class="alsoButton" @click="logout">Logout</div>
+        </router-link>
+      </div>
 </template>
 
 <script>
 import axios from 'axios'
-
+function redireccionarAPaginaCliente(){
+        window.location.href = '/menuClient';
+    }
+    //Lougout
+    function redireccionarAPaginaPrincipal(){
+        window.location.href = '/inicio';
+    }
 export default{
     data (){
         return{
@@ -133,6 +149,7 @@ export default{
             paso2Resultado : null,
             paso3Resultado : null,
             compraFinalizada : false,
+            sucursalFinal: null,
         }
     },
     methods :{
@@ -182,7 +199,7 @@ export default{
         },
         async paso2(){
             try {
-                const resultado = await axios.post(import.meta.env.VITE_BASE_URL + "api/arriendo/paso2/", null);
+                const resultado = await axios.post(import.meta.env.VITE_BASE_URL + "api/arriendo/paso2", null);
                 this.paso2Resultado = resultado.data;
                 console.log("paso2Resultado :");
                 console.log(this.paso2Resultado);
@@ -192,9 +209,13 @@ export default{
             }
         },
         async paso3(){
-            const fechaCompra = fechaInicio.value;
+            console.log(sucursalFinal);
+            console.log(this.sucursalFinal);
+            const sucursalMegaFinal = this.sucursal.id;
+            const fechaCompra = this.fechaInicio;
             try {
-                const resultado = await axios.post(import.meta.env.VITE_BASE_URL + "api/arriendo/paso3?idSucursalFinal="+ sucursalFinal.value, fechaCompra);
+                const resultado = await axios.post(import.meta.env.VITE_BASE_URL + "api/arriendo/paso3?idSucursalFinal=" + sucursalMegaFinal, fechaCompra);
+                console.log(resultado);
                 this.paso3Resultado = resultado.data;
                 console.log("paso3Resultado :");
                 console.log(this.paso3Resultado);
@@ -205,6 +226,19 @@ export default{
             catch (error){
                 alert(error);
             }
+        },
+        regresar(){
+                redireccionarAPaginaCliente();
+        },
+        async logout(){
+               //SECCION DE LOGOUT
+                try {
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/logout/");
+                    console.log(registro);
+                    redireccionarAPaginaPrincipal();
+                } catch (error) {
+                    alert(error);
+                }
         }
     }
 }

@@ -98,6 +98,11 @@
           <div class="alsoButton" @click="regresar">Regresar al menu anterior</div>
         </router-link>
       </div>
+      <div class="alsoButtons">
+        <router-link to="/inicio">
+          <div class="alsoButton" @click="logout">Logout</div>
+        </router-link>
+      </div>
     </form>
   </div>
 </template>

@@ -30,7 +30,7 @@
                 client.value = true;
                 console.log(client);
             };
-            if(perfiles.value.includes("empleado")){
+            if(perfiles.value.includes("Empleado")){
                 employee.value = true;
             };
         } catch (error) {

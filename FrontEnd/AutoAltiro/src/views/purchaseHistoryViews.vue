@@ -39,7 +39,43 @@ onMounted(async () => {
     </div>
 
   </div>
+  <router-link to ="/menuClient">
+        <button @click="volver">Regresar</button>
+    </router-link>
+    <div class="alsoButtons">
+      <router-link to="/inicio">
+        <div class="alsoButton" @click="logout">Logout</div>
+      </router-link>
+    </div>
 </template>
+
+<script>
+  import axios from 'axios';
+  function redireccionarAPaginaCliente(){
+    window.location.href = '/menuClient';
+  }
+  //Logout
+  function redireccionarAPaginaPrincipal(){
+        window.location.href = '/inicio';
+  }
+  export default{
+    methods:{
+      volver(){
+                redireccionarAPaginaCliente();
+      },
+      async logout(){
+               //SECCION DE LOGOUT
+                try {
+                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/logout/");
+                    console.log(registro);
+                    redireccionarAPaginaPrincipal();
+                } catch (error) {
+                    alert(error);
+                }
+      }
+    }
+  }
+</script>
 
 <style>
 

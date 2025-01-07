@@ -71,8 +71,8 @@ const updateEstado = async () => {
 
 <script>
   import axios from 'axios';
-  function redireccionarAPaginaCliente(){
-    window.location.href = '/menuClient';
+  function redireccionarAPaginaEmpleado(){
+    window.location.href = '/menuEmployee';
   }
   //Logout
   function redireccionarAPaginaPrincipal(){
@@ -81,7 +81,7 @@ const updateEstado = async () => {
   export default{
     methods:{
       volver(){
-                redireccionarAPaginaCliente();
+                redireccionarAPaginaEmpleado();
       },
       async logout(){
                //SECCION DE LOGOUT

@@ -48,6 +48,9 @@ onBeforeMount(async () => {
     <router-link to="/editAvailability">
       <button @click="handleChangeDisponibilidad">Cambiar disponibilidad vehículo</button>
     </router-link>
+    <router-link to ="/tipoUsuario">
+        <button @click="volver">Regresar</button>
+    </router-link>
   </div>
   </template>
 

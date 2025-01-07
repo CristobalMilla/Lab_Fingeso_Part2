@@ -77,8 +77,8 @@ const obtenerVehiculosDisponibles = async () => {
   <div class="page-container">
     <div class="content-card">
       <h1 class="page-title">Vehículos Disponibles por Sucursal</h1>
-      <div class="button-group">
-        <router-link to="/menuClient" class="btn">
+      <div class="button-container">
+        <router-link v-if="isClient" to="/menuClient" class="btn">
           Volver al Menú
         </router-link>
         <router-link to="/inicio" class="btn" @click="logout">
@@ -313,6 +313,10 @@ export default{
   background: #f8fafc;
   border-radius: 8px;
   color: #64748b;
+}
+.select-wrapper label {
+  color: #2c3e50;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {

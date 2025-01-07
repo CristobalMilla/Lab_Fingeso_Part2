@@ -45,7 +45,6 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-    <h1>Hola</h1>
     <h3>Vehículos activos</h3>
     <ul>
       <li v-for="vehiculo in availableVehicles" :key="vehiculo.idvehiculo" class="vehicle-item">
@@ -64,6 +63,9 @@ onBeforeMount(async () => {
         </div>
       </li>
     </ul>
+    <router-link to ="/menuEmployee">
+        <button @click="volver">Regresar</button>
+    </router-link>
   </template>
 
   <style>

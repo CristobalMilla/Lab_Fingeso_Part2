@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const sucursales = ref([]); // Lista de sucursales
 const sucursalSeleccionada = ref(null); // Sucursal seleccionada
-const sucursalFinal = ref(null); // Sucursal seleccionada
 const vehiculosDisponibles = ref([]); // Lista de vehículos disponibles
 const mensajeError = ref(''); // Mensaje de error
 
@@ -110,7 +109,6 @@ const obtenerVehiculosDisponibles = async () => {
           </option>
         </select>
       </div>
-      <p>{{sucursalFinal}}</p>
       <button v-if="sucursalFinal" @click="paso3">Finalizar compra</button>
     </div>
 
@@ -118,27 +116,12 @@ const obtenerVehiculosDisponibles = async () => {
       <p>¡Compra Finalizada!</p>
     </div>
   </div>
-  <div class="alsoButtons">
-        <router-link to="/menuClient">
-          <div class="alsoButton" @click="regresar">Regresar al menu anterior</div>
-        </router-link>
-      </div>
-      <div class="alsoButtons">
-        <router-link to="/inicio">
-          <div class="alsoButton" @click="logout">Logout</div>
-        </router-link>
-      </div>
+  
 </template>
 
 <script>
 import axios from 'axios'
-function redireccionarAPaginaCliente(){
-        window.location.href = '/menuClient';
-    }
-    //Lougout
-    function redireccionarAPaginaPrincipal(){
-        window.location.href = '/inicio';
-    }
+
 export default{
     data (){
         return{
@@ -209,36 +192,22 @@ export default{
             }
         },
         async paso3(){
-            console.log(sucursalFinal);
-            console.log(this.sucursalFinal);
-            const sucursalMegaFinal = this.sucursal.id;
-            const fechaCompra = this.fechaInicio;
+            const fechaCompra = {
+              "fechainicio": this.fechaInicio
+            }
+            console.log(this.fechaInicio)
             try {
-                const resultado = await axios.post(import.meta.env.VITE_BASE_URL + "api/arriendo/paso3?idSucursalFinal=" + sucursalMegaFinal, fechaCompra);
-                console.log(resultado);
+                const resultado = await axios.post(import.meta.env.VITE_BASE_URL + "api/arriendo/paso3?idSucursalFinal="+ this.sucursalFinal, fechaCompra);
                 this.paso3Resultado = resultado.data;
                 console.log("paso3Resultado :");
                 console.log(this.paso3Resultado);
-                if (paso3Resultado == 1){
+                if (this.paso3Resultado == 1){
                     this.compraFinalizada = true;
                 }
             }
             catch (error){
                 alert(error);
             }
-        },
-        regresar(){
-                redireccionarAPaginaCliente();
-        },
-        async logout(){
-               //SECCION DE LOGOUT
-                try {
-                    const registro = await axios.put(import.meta.env.VITE_BASE_URL + "api/usuario/logout/");
-                    console.log(registro);
-                    redireccionarAPaginaPrincipal();
-                } catch (error) {
-                    alert(error);
-                }
         }
     }
 }

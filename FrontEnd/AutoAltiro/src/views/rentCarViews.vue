@@ -151,6 +151,30 @@ export default{
                 this.paso1Resultado = resultado.data;
                 console.log("paso1Resultado :");
                 console.log(this.paso1Resultado);
+                if(this.paso1Resultado == 0){
+                    console.log("Usuario no está logueado");
+                    alert("No existe el vehículo en la BD");
+                }
+                if(this.paso1Resultado == 2){
+                    console.log("No existe el vehículo en la BD");
+                    alert("No existe el vehículo en la BD");
+                }
+                if(this.paso1Resultado == 3){
+                    console.log("El vehículo no está disponible");
+                    alert("El vehículo no está disponible");
+                }
+                if(this.paso1Resultado == 4){
+                    console.log("El usuario tiene arriendos activos");
+                    alert("El usuario tiene arriendos activos");
+                }
+                if(this.paso1Resultado == 5){
+                    console.log("El vehículo no está reservado entre las fechas");
+                    alert("El vehículo no está reservado entre las fechas");
+                }
+                if(this.paso1Resultado == 6){
+                    console.log("El arriendo sobrepasa los 30 días");
+                    alert("El arriendo sobrepasa los 30 días");
+                }
             }
             catch (error){
                 alert(error);
